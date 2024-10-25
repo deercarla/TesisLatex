@@ -140,9 +140,7 @@ Con un total de 12 unidades y una duración de 3 meses, se realizó una evaluaci
 
 \subsubsection{Extracción}\textbf{ }
 
-Los datos se extrajeron a partir de de un google drive \textcolor{red}{charlar con matias}
-
-De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las primeras 5. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del mismo. 
+Los ejercicios fueron entregados a través de \emph{google-forms}. Los ejercicios de interés se descargaron de un \emph{google-drive} de uno de los docentes de la materia. De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las primeras 5. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del mismo. 
 
 A continuación se detallan los contenidos de las primeras unidades a analizar:
 
@@ -708,7 +706,6 @@ Una característica útil de \emph{Fuzzy-2-means} es que este permite que alguno
 
 No se observaron alumnos a los cuales asignara parcialmente a un grupo, perteneciendo todos en su totalidad a alguno de los \emph{clusters} mostrados en la figura anterior. Si se observó un incremento en la cantidad de \emph{clusters} que, si bien son más homogéneos, se debe a que estos son muy pequeños, contando con una cantidad de apenas algunos estudiantes. Luego, este algoritmo no proporcionó información adicional por sobre el \emph{Kmeans} tradicional, para este caso particular.
 
-
 \section{Representando a los alumnos como un único vector}
 
 Basándonos en los resultados anteriores, se exploró un nuevo enfoque que consistió en utilizar los vectores generados por el modelo \emph{CodeBERT}, concatenándolos según el orden cronológico del curso para obtener una única representación vectorial por estudiante. La hipótesis subyacente era que esta representación unificada permitiría una mejor discriminación entre los estudiantes que completaron el curso y aquellos que, si bien continuaron después del primer examen, no lo finalizaron.
@@ -792,7 +789,7 @@ Los resultados obtenidos sugieren que, si bien el análisis del código por sí 
 
 \chapter{Trabajo futuro}
 
-Cerdeiro et al. destacan que durante la pandemia se implementaron diversos canales de comunicación, como Slack, lo cual facilitó que las \emph{consultas estuvieran organizadas de manera que los estudiantes pudieran buscarlas, revisarlas y comentarlas fácilmente, evitando así su repetición} \cite{unsam2020}. Por su parte, en el trabajo "Embedding navigation patterns for student performance prediction", Loginova et al. desarrollaron un método para predecir el rendimiento académico estudiantil analizando patrones de navegación en plataformas educativas en línea, en lugar de basarse en calificaciones previas \cite{loginova2021embedding}. Su investigación reveló que el análisis de las secuencias de acciones de los estudiantes permitió identificar diferentes estrategias de aprendizaje entre alumnos de alto y bajo rendimiento, información valiosa para implementar sistemas de alerta temprana. Siguiendo esta línea, podríamos explorar la posibilidad de predecir qué estudiantes completarán el curso, considerando no solo el código que producen sino también sus patrones de interacción en la plataforma.
+Cerdeiro et al. destacan que durante la pandemia se implementaron diversos canales de comunicación, como Slack, lo cual facilitó que las \emph{consultas estuvieran organizadas de manera que los estudiantes pudieran buscarlas, revisarlas y comentarlas fácilmente, evitando así su repetición} \cite{unsam2020}. Por su parte, en el trabajo ``Embedding navigation patterns for student performance prediction", Loginova et al. desarrollaron un método para predecir el rendimiento académico estudiantil analizando patrones de navegación en plataformas educativas en línea, en lugar de basarse en calificaciones previas \cite{loginova2021embedding}. Su investigación reveló que el análisis de las secuencias de acciones de los estudiantes permitió identificar diferentes estrategias de aprendizaje entre alumnos de alto y bajo rendimiento, información valiosa para implementar sistemas de alerta temprana. Siguiendo esta línea, podríamos explorar la posibilidad de predecir qué estudiantes completarán el curso, considerando no solo el código que producen sino también sus patrones de interacción en la plataforma. Queda pendiente, además, indagar más sobre los comentarios dejados por los alumnos dentro del código. Esta información adicional podría servir de ayuda a la hora de realizar los agrupamientos futuros.
 
 La estructura actual de nuestra base de datos facilitaría la incorporación de variables adicionales, como la cantidad de entregas por alumno. Un análisis más exhaustivo podría examinar la trayectoria individual de cada estudiante, contemplando tanto su progreso entre ejercicios como su evolución dentro de cada entrega.
 
