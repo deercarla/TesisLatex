@@ -708,66 +708,70 @@ Una característica útil de \emph{Fuzzy-2-means} es que este permite que alguno
 
 No se observaron alumnos a los cuales asignara parcialmente a un grupo, perteneciendo todos en su totalidad a alguno de los \emph{clusters} mostrados en la figura anterior. Si se observó un incremento en la cantidad de \emph{clusters} que, si bien son más homogéneos, se debe a que estos son muy pequeños, contando con una cantidad de apenas algunos estudiantes. Luego, este algoritmo no proporcionó información adicional por sobre el \emph{Kmeans} tradicional, para este caso particular.
 
+Te ayudo a expandir y mejorar esta sección, agregando más detalles y análisis:
+
 \section{Representando a los alumnos como un único vector}
 
-Teniendo en cuenta resultados anteriores, se consideraron los vectores generados por el modelo \emph{CodeBERT} y se los concatenó respetando el el orden cronológico del curso, obeteniendo así un único vector por estudiante. Con esto se esperaba poder distinguir de mejor manera a quienes habían terminado el curso de quienes no. Más específico aún, a quienes lo finalizaron de quienes lo continuaron después del primer examen.
-
+Basándonos en los resultados anteriores, se exploró un nuevo enfoque que consistió en utilizar los vectores generados por el modelo \emph{CodeBERT}, concatenándolos según el orden cronológico del curso para obtener una única representación vectorial por estudiante. La hipótesis subyacente era que esta representación unificada permitiría una mejor discriminación entre los estudiantes que completaron el curso y aquellos que, si bien continuaron después del primer examen, no lo finalizaron.
 
 \subsection{Vectores de ceros}
 
-Es deseable que los vectores de cada estudiante posean la misma dimensión, para así poder replicar el procedimiento descrito en secciones anteriores de reducción de dimensionalidad y agrupamiento. Un desafío a la hora de encarar este enfoque fue el ``rellenado'' de las entregas no realizadas por los alumnos.
+Para implementar técnicas de reducción de dimensionalidad y agrupamiento, es fundamental que todos los vectores de estudiantes tengan la misma dimensión. Esto presentó un desafío importante: ¿cómo manejar las entregas no realizadas por los alumnos?
 
- En un primer intento, para cada individuo y, para cada ejercicio, se concatenaron:
+En una primera aproximación, se construyó el vector de cada estudiante de la siguiente manera:
 
- \begin{itemize}
-     \item Con el \emph{embedding} correspondiente a la entrega, de estar presente.
-     \item Con un vector de 768 ceros (dimensión del \emph{output} de \emph{CodeBERT}).
- \end{itemize}
+\begin{itemize}
+    \item \textbf{Para entregas realizadas}: se utilizó el \emph{embedding} generado por \emph{CodeBERT} correspondiente a dicha entrega.
+    \item\textbf{Para entregas ausentes}: se insertó un vector de 768 ceros (coincidiendo con la dimensión del \emph{output} de \emph{CodeBERT}).
+\end{itemize}
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/fill functiontodos_los_graficos_en_una_sola_figura.png}
-    \caption{Resultado de realizar PCA y \emph{Kmeans} con \emph{k} = 2 con cada estudiante representando un único vector; agregando de a un ejercicio por vez. Ejercicios no entregados rellenados con vectores nulos.}
+    \caption{Evolución del agrupamiento mediante PCA y \emph{Kmeans} (k = 2) a lo largo del curso. Cada gráfico representa la adición secuencial de ejercicios, donde las entregas faltantes se completaron con vectores nulos.}
     \label{fig: zeros}
 \end{figure}
 
+Como se observa en la Figura \ref{fig: zeros}, la separación entre grupos se vuelve más pronunciada a medida que se incorporan más ejercicios al análisis. Sin embargo, esta aparente mejora en la clasificación requiere un análisis más profundo, como se discutirá más adelante.
+
 \subsection{Función vacía}
-Si bien el enfoque anterior parece razonable, es muy difícil saber qué representa un vector de ceros en el dominio de \emph{CodeBERT}. Luego, se decidió repetir el procedimiento anterior, ahora rellenando con una ``función vacía''. Entonces obtuvimos, para cada alumno una concatenación:
 
+Considerando que un vector de ceros podría no tener un significado semántico claro en el espacio vectorial de \emph{CodeBERT}, se implementó una segunda estrategia. En este caso, las entregas faltantes se representaron mediante el \emph{embedding} de una ``función vacía'' específica para cada ejercicio. El proceso de construcción fue el siguiente:
 
- \begin{itemize}
-     \item Con el \emph{embedding} correspondiente a la entrega, de estar presente.
-     \item Con un vector representando la ``función vacía'' para ese ejercicio. A modo de ejemplo, para el ejercicio \emph{buscar\_u\_elemento}, obtendríamos los \emph{embeddings} de la siguiente producción:
- \end{itemize}
+\begin{itemize}
+    \item \textbf{Para entregas realizadas}: se mantuvo el \emph{embedding} original de \emph{CodeBERT}.
+    \item \textbf{Para entregas ausentes}: se generó el \emph{embedding} de una función vacía contextualizada al ejercicio correspondiente.
+\end{itemize}
 
+Por ejemplo, para el ejercicio \emph{buscar\_u\_elemento}, la función vacía se definió como:
 
 \begin{lstlisting}[style=pythonstyle]
 def buscar_u_elemento():
     pass
 \end{lstlisting}
 
-Obteniéndose el siguiente resultado:
-
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/zerostodos_los_graficos_en_una_sola_figura.png}
-    \caption{Resultado de realizar PCA y \emph{Kmeans} con \emph{k} = 2 con cada estudiante representando un único vector; agregando de a un ejercicio por vez. Ejercicios no entregados rellenados con el vector correspondiente a la función vacía}
+    \caption{Evolución del agrupamiento utilizando PCA y \emph{Kmeans} (k = 2) a lo largo del curso. Los ejercicios no entregados se representaron mediante el \emph{embedding} de una función vacía contextualizada.}
     \label{fig: fill func}
 \end{figure}
 
-\subsection{Comparación respecto a la proporción de entregas}
+En la Figura \ref{fig: fill func}, se observa una tendencia similar a la del enfoque anterior: la separación entre grupos se acentúa conforme se incorporan más ejercicios al análisis. Las diferencias entre ambos métodos de completado no resultan sustanciales en términos de la calidad del agrupamiento.
 
-Para evaluar la incidencia de la añadidura de vectores sintéticos en los \emph{embeddings} concatenados de los estudiantes, se analizó la cantidad de entregas total por ejercicio.  
+\subsection{Análisis de la proporción de entregas}
+
+Para comprender mejor la naturaleza de los agrupamientos observados, se realizó un análisis complementario examinando la proporción de entregas por ejercicio:
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/proporcion - entregas (1).png}
-    \caption{Proporción de estudiantes que entregaron cada ejercicio.}
+    \caption{Distribución temporal de las entregas realizadas por ejercicio, expresada como proporción del total de estudiantes.}
 \end{figure}
 
-Se observó que la información proporcionada por la Figura anterior y las Figuras \ref{fig: zeros} y \ref{fig: fill func}, era muy similar: si bien para el ejercicio \emph{experimento\_figus} en el \emph{cluster\_0} podemos observar que, la cantidad de los estudiantes que luego finalizaron el curso es del 74\%, si nos focalizamos únicamente en los alumnos que efectivamente entregaron este ejercicio, en este grupo se encuentra un 80\% de los estudiantes que lo terminaron. 
+Al contrastar esta información con los resultados de agrupamiento (Figuras \ref{fig: zeros} y \ref{fig: fill func}), se reveló un patrón significativo: la aparente mejora en la clasificación está más relacionada con la tasa de participación que con las características intrínsecas de las soluciones. Por ejemplo, para el ejercicio \emph{experimento\_figus}, aunque el \emph{cluster\_0} contiene un 74\% de estudiantes que finalizaron el curso, este porcentaje aumenta al 80\% cuando se considera únicamente a quienes entregaron dicho ejercicio.
 
-Mientras que, en instancias más preliminares, los resultados del \emph{clustering} en cuanto a proporciones de estos dos grupos se sostienen cercanas al 50\%, por lo que tampoco resultan de utilidad. Luego, podríamos decir que hay indicadores de que para este caso y por cómo fueron los vectores individuales, el agrupamiento separa por entregas realizadas y no por quiénes finalizarán el curso.
+Es notable que en las etapas iniciales del curso, las proporciones entre grupos se mantienen cercanas al 50\%, sugiriendo una clasificación poco efectiva. Este análisis nos lleva a concluir que el algoritmo de agrupamiento está capturando principalmente patrones de participación (entregas realizadas vs. no realizadas) en lugar de características distintivas entre estudiantes que completarán o no el curso. Esta observación sugiere que la mera presencia o ausencia de entregas podría ser un predictor más simple y efectivo que el análisis del contenido de las soluciones para este propósito específico.
 
 \chapter{Conclusión}
 
