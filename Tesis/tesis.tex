@@ -145,7 +145,7 @@ El enfoque pedagógico de este curso, tanto en sus contenidos como en su metodol
 
 \subsubsection{Extracción}\textbf{ }
 
-Los ejercicios fueron entregados a través de \emph{google-forms}. Los ejercicios de interés se descargaron de un \emph{google-drive} de uno de los docentes de la materia. De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las primeras 5. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del mismo. 
+Los ejercicios fueron entregados a través de \emph{google-forms}. Las ejercitaciones de interés se descargaron de un \emph{google-drive} de uno de los docentes de la materia. De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las primeras 5, como se observa en la figura \ref{contenidos}. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del mismo. 
 
 A continuación se detallan los contenidos de las primeras unidades a analizar:
 
@@ -153,7 +153,12 @@ A continuación se detallan los contenidos de las primeras unidades a analizar:
     \centering
     \includegraphics[width=0.8\textwidth]{imagenes/modulos-curso.PNG}
     \caption{Contenidos evaluados en las unidades extraídas para este análisis ~\cite{unsam2020}}
+    \label{contenidos}
 \end{figure}
+
+
+
+\subsubsection{Transformación}\textbf{ }
 
 A los códigos extraídos de los 31 ejercicios comprendidos por estas unidades para los más de 800 alumnos de los cuales los obtuvimos, se los anonimizó. Para ello asociamos cada entrega con un identificador creado por nosotros, \emph{id\_anon}.
 
@@ -164,8 +169,6 @@ Se obtuvieron entonces en una primera instancia tres conjuntos de datos:
     \item \textbf{Resultados} de la cursada, con el identificador del estudiante, la nota de las entregas, los dos parciales y el trabajo práctico y un booleano haciendo referencia a si este aprobó o no la cursada. Dentro de este conjunto se encuentran únicamente aquellos alumnos que finalizaron la materia.  
 \end{itemize} 
 
-\subsubsection{Transformación}\textbf{ }
-
 Webster et al. definen \emph{token} como una unidad básica en el procesamiento del lenguaje natural (NLP) que no necesita ser descompuesta en etapas posteriores del procesamiento. Puede ser un elemento como una palabra, un modismo o una expresión fija, que se trata como un átomo indivisible para los propósitos de la computación. La tokenización implica identificar estas unidades básicas en el texto, que son esenciales para realizar análisis o generación de texto posteriores~\cite{tokens}.
 
 El modelo de interés, \emph{CodeBERT}, tiene un límite de 512 \emph{tokens} para la entrada. Esto significa que cualquier secuencia de código a procesar tiene que ser truncada o dividida para que no exceda esta cantidad. Es debido a esta limitación del modelo que se tomó la decisión de realizar una limpieza del código, eliminando así los comentarios del mismo. Además, por ejercicio a entregar se contaba con una función \emph{objetivo}, que fue la que se consideró para la extracción. Cabe destacar que de realizarse testeos automatizados, aquellos archivos que no contaran con dichas funciones \emph{objetivo} (o estuvieran mal nomencladas), habrían fallado. Esto se consideró como un criterio adicional para discriminar entre qué datos incorporaríamos al análisis subsiguiente y cuáles no. 
@@ -174,9 +177,10 @@ El modelo de interés, \emph{CodeBERT}, tiene un límite de 512 \emph{tokens} pa
     \centering
     \includegraphics[width=1\textwidth]{imagenes/ast.PNG}
     \caption{Código entregado por un estudiante como resolución del ejercicio \emph{propagar} antes y después de su limpieza. A modo de ejemplo, utilizando \emph{nlkt.tokenize} la cantidad de \emph{tokens} del código de la izquierda es de 337 y el de la derecha, 38.}
+      \label{limpieza}
 \end{figure}
 
-Mencionan Glassman et al. en su trabajo \emph{OverCode: visualizing variation in student solutions to programming problems at scale} \cite{overcode} en relación a la limpieza de comentarios de código a analizar que \emph{...la variación en los comentarios es tan grande que agruparlos y resumirlos requerirá un diseño adicional significativo}. Este es otro motivo para eliminar el texto adicional de las producciones de alumnos.
+Mencionan Glassman et al. en su trabajo \emph{OverCode: visualizing variation in student solutions to programming problems at scale} \cite{overcode} en relación a la limpieza de comentarios de código a analizar que \emph{...la variación en los comentarios es tan grande que agruparlos y resumirlos requerirá un diseño adicional significativo}. Este es otro motivo para eliminar el texto adicional de las producciones de alumnos para la limpieza realizada, como se observa en la Figura \ref{limpieza}.
 
 Para el código en sí, se hizo uso de los \emph{Abstract Syntax Trees (AST)}. Un árbol de sintaxis abstracta es una representación estructurada de un programa, que retiene la estructura esencial del árbol de análisis sintáctico pero elimina los nodos innecesarios. Mantiene la precedencia y el significado de las expresiones, simplificando la representación al omitir la mayoría de los nodos de los símbolos no terminales\cite{cooper2011engineering}. Esto permitió un rápido filtrado de las llamadas funciones \emph{objetivo} y la eliminación de los comentarios de manera mucho más eficiente que utilizando expresiones regulares. Para lo mencionado anteriormente puede utilizarse la biblioteca \emph{ast} \cite{ast} en Python.
 
@@ -184,19 +188,20 @@ Para el código en sí, se hizo uso de los \emph{Abstract Syntax Trees (AST)}. U
 
 \textbf{Código a embeddings}
 
-Como se mencionó anteriormente, se usó el modelo \emph{CodeBERT} para pasar del código a los \emph{embeddings}. Desde la biblioteca \emph{transformers} \cite{roberta_model} es posible importar tanto el \emph{tokenizador} como el modelo en sí con:
+Como se mencionó anteriormente, se usó el modelo \emph{CodeBERT} para pasar del código a los \emph{embeddings}. Desde la biblioteca \emph{transformers} \cite{roberta_model} es posible importar tanto el \emph{tokenizador} como el modelo en sí con el código mostrado en el Listado \ref{lst:codebert_import}.
 
-\begin{lstlisting}[language=Python]
+\begin{lstlisting}[language=Python, label={lst:codebert_import}, caption={Importación de CodeBERT}][H]
 from transformers import RobertaTokenizer, RobertaModel
 tokenizer = RobertaTokenizer.from_pretrained("microsoft/
 codebert-base")
 model = RobertaModel.from_pretrained("microsoft/codebert-base")
 \end{lstlisting}
 
-Luego, para cada archivo \emph{.py}, una vez limpiado como se mencionó en secciones anteriores, bastó con realizar lo siguiente para obtener sus \emph{embeddings} a partir de \emph{CodeBERT}:
+Luego, para cada archivo \emph{.py}, una vez limpiado como se mencionó en secciones anteriores, bastó con realizar el procedimiento descrito en el Algoritmo \ref{alg:embedding_calc} para obtener sus \emph{embeddings} a partir de \emph{CodeBERT}.
 
-\begin{algorithm}
+\begin{algorithm}[H]
 \caption{Cálculo de Embeddings para Códigos}
+\label{alg:embedding_calc}
 \begin{algorithmic}[1]
 \State Inicializar lista vacía \texttt{embeddings}
 \For{cada \texttt{código} en la lista de códigos}
@@ -235,7 +240,7 @@ Para almacenar los tres conjuntos de datos previamente mencionados, se optó por
     \item \textbf{Integración con herramientas de análisis y desarrollo}: MongoDB se integra fácilmente con una amplia variedad de herramientas de análisis de datos, lenguajes de programación y bibliotecas, lo que facilita el desarrollo de aplicaciones y análisis de datos en entornos como Python. En particular, a la hora de implementar un conector para la base de datos creada localmente, se usó la biblioteca \emph{pymongo} \cite{pymongo}.
 \end{itemize}
 
-Luego, la base de datos en cuestión se organizó con la siguiente estructura de colecciones:
+Luego, la base de datos en cuestión se organizó con la estructura descrita en la Figura \ref{diagrama-base}.
 
 \begin{figure}[H]
     \centering
@@ -265,10 +270,11 @@ Teniendo todo lo anterior en cuenta, se usó PCA para reducir la dimensionalidad
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{imagenes/varianza-explicada.png}
-    \caption{Varianza explicada en relación a la cantidad de componentes .}
+    \caption{Varianza explicada en relación a la cantidad de componentes.}
+    \label{varianzaPCA}
 \end{figure}
 
-Esta varianza explicada se la comparó con la de trabajos similares, como el de \emph{user2-code2vec: Embeddings for Profiling Students Based on Distributional Representations of Source Code} \cite{user2code} en el que proponen una metodología para perfilar a estudiantes individuales de ciencias de la computación según su diseño de programación, utilizando \emph{embeddings}. Azcona et al. mencionan que, hablando de los embeddings con los que estaban trabajando, \emph{Los vectores se transforman a 2 dimensiones utilizando PCA. La varianza retenida es muy baja (entre 2\% y 6\%)}. Cabe destacar igualmente que, si bien a raíz de lo anterior no se esperaba una varianza explicada muy alta, en el trabajo de Azcona et al. el tamaño de los vectores generados es casi veinte veces mayor que el de los generados por \emph{CodeBERT}.
+La varianza explicada observada en la Figura \ref{varianzaPCA} se la comparó con la de trabajos similares, como el de \emph{user2-code2vec: Embeddings for Profiling Students Based on Distributional Representations of Source Code} \cite{user2code} en el que proponen una metodología para perfilar a estudiantes individuales de ciencias de la computación según su diseño de programación, utilizando \emph{embeddings}. Azcona et al. mencionan que, hablando de los embeddings con los que estaban trabajando, \emph{Los vectores se transforman a 2 dimensiones utilizando PCA. La varianza retenida es muy baja (entre 2\% y 6\%)}. Cabe destacar igualmente que, si bien a raíz de lo anterior no se esperaba una varianza explicada muy alta, en el trabajo de Azcona et al. el tamaño de los vectores generados es casi veinte veces mayor que el de los generados por \emph{CodeBERT}.
 
 \subsection{Extracción de información adicional}\label{subsec:extraccion}
 
@@ -282,20 +288,24 @@ Para ello, se tomó una producción de código de un alumno al azar del ejercici
     \item Agregado de prints.
     \item Simplificación del código.
 \end{enumerate}
+Entre otras.
 
-Entre otros. Se obtuvo lo siguiente:
-
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=\textwidth]{imagenes/codigo-similar.png}
     \caption{Representación de los dos primeros componentes de diferentes variantes del ejercicio \emph{tiene\_a}.}
+     \label{variaciones-codigo}
 \end{figure}
 
-Como era de esperarse, se observó que variantes muy similares del código (como, por ejemplo las propuestas por los ítems 1) y 3)) no se distanciaban mucho las unas de las otras. En la figura anterior se puede observar también una clara tendencia en cuanto a la longitud del código y su representación en el plano. Además, diferencias cómo el uso de $for$ (los tres puntos comprendidos entre las dos cajas rojas) y el $while$ (aquellos comprendidos entre las cajas violetas) o la ausencia de ambos, tuvieron también un impacto significativo en los \emph{embeddings} y su representación en el plano de dos dimensiones.
+Como era de esperarse, como muestra la Figura \ref{variaciones-codigo}, se observó que variantes muy similares del código (como, por ejemplo las propuestas por los ítems 1) y 3)) no se distanciaban mucho las unas de las otras. En la figura anterior se puede observar también una clara tendencia en cuanto a la longitud del código y su representación en el plano. Además, diferencias cómo el uso de $for$ (los tres puntos comprendidos entre las dos cajas rojas) y el $while$ (aquellos comprendidos entre las cajas violetas) o la ausencia de ambos, tuvieron también un impacto significativo en los \emph{embeddings} y su representación en el plano de dos dimensiones.
 
 A partir de lo anterior y, como se refleja en la Figura \ref{diagrama-base}, se tuvieron en cuenta para caracterizar cada código información como su uso de $for$, $while$, la cantidad de $if$ y la cantidad de líneas dentro de otras que surgieron a raíz de repetir el análisis anterior con otros ejercicios.
 
-\subsection{Kmeans}
+\subsection{Agrupamiento}
+
+La próxima sección abordará las técnicas de \emph{clustering} implementadas para agrupar estudiantes, basándose en los \emph{embeddings} y la reducción dimensional mediante PCA previamente obtenidos.
+
+\subsubsection{Kmeans}\textbf{ } 
 
 El algoritmo \emph{K-means} es una técnica de aprendizaje no supervisado ampliamente utilizada para resolver problemas de agrupamiento. Funciona dividiendo un conjunto de datos en \emph{k} \emph{clusters} ó grupos distintos. 
 
@@ -394,14 +404,14 @@ Finalmente, mencionamos que los estudiantes tenían la posibilidad de entregar u
 
 
 \chapter{Resultados y discusión}
-\section{Ejercicio a ejercicio}
+\section{Análisis individual de los ejercicios}
 
 En una primera instancia, se evaluó ejercicio a ejercicio entregable la distancia euclidiana entre los puntos generados después de realizar la mencionada reducción de la dimensionalidad para los alumnos en cada una de las 31 funciones. Con esto se esperaba ver grupos bien definidos y una correlación en cada instancia de evaluación entre ellos y los grupos de interés (esto es, estudiantes que terminaron \emph{vs} los que no). 
 
 Para ello, se graficaron varios \emph{heatmaps} esperando ver en ellos distintos grupos de alumnos. 
 
-Se observó que, en ejercicios que podrían considerarse más sencillos como, por ejemplo, el ejercicio \emph{tirar} de la unidad 5 que consistia en obtener el resultado de tirar un dado equilibrado de seis caras \emph{n} veces, o \emph{crear\_album} de la misma unidad que consistía en crear un ``álbum'' (un vector de ceros) de \emph{n} figuritas, habían grupos claramente definidos, como se observa en las siguientes figuras:
-\begin{figure}[H]
+Se observó que, en ejercicios que podrían considerarse más sencillos como, por ejemplo, el ejercicio \emph{tirar} de la unidad 5 que consistia en obtener el resultado de tirar un dado equilibrado de seis caras \emph{n} veces, o \emph{crear\_album} de la misma unidad que consistía en crear un ``álbum'' (un vector de ceros) de \emph{n} figuritas, habían grupos claramente definidos, como se observa en la Figura \ref{fig:figuras_juntas}.
+\begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/heatmap-1-crear album.png}
@@ -418,9 +428,8 @@ Se observó que, en ejercicios que podrían considerarse más sencillos como, po
     \label{fig:figuras_juntas}
 \end{figure}
 
-En otros ejemplos, en los cuales los ejercicios podían llegar a presentar una mayor dificultad o ambigüedad para los alumnos, los grupos no fueron tan claros. Este es el caso, por ejemplo, de los ejercicios \emph{es\_generala} de la unidad cinco y \emph{propagar} de la unidad cuatro. Para la primera, el comportamiento esperado para la función era que retornara \emph{True} si y sólo si los cinco dados de la lista tirada eran iguales. Para el segundo mencionado, los estudiantes debían escribir una función que recibiera una lista de fósforos (0: nuevo, 1: encendido, -1: carbonizado) y devolviera la lista con el fuego propagado a los fósforos nuevos adyacentes:
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/heatmap-1-propagar.png}
@@ -434,14 +443,18 @@ En otros ejemplos, en los cuales los ejercicios podían llegar a presentar una m
         \label{fig:figura2}
     \end{subfigure}
     \caption{Ejemplos de ejercicios con grupos no marcados, analizando las distancias entre las entregas de cada alumno con cada alumno}
-    \label{fig:figuras_juntas}
+    \label{fig:figuras_juntas_dos}
 \end{figure}
+
+En otros ejemplos, como los de la Figura \ref{fig:figuras_juntas_dos}, en los cuales los ejercicios podían llegar a presentar una mayor dificultad o ambigüedad para los alumnos, los grupos no fueron tan claros. Este es el caso, por ejemplo, de los ejercicios \emph{es\_generala} de la unidad cinco y \emph{propagar} de la unidad cuatro. Para la primera, el comportamiento esperado para la función era que retornara \emph{True} si y sólo si los cinco dados de la lista tirada eran iguales. Para el segundo mencionado, los estudiantes debían escribir una función que recibiera una lista de fósforos (0: nuevo, 1: encendido, -1: carbonizado) y devolviera la lista con el fuego propagado a los fósforos nuevos adyacentes.
+
+
 
 Cabe destacar que, a excepción de otros ejercicios típicamente introductorios en cursos como estos (como \emph{sumar}, \emph{máximo}, \emph{mínimo} dentro de otros), los gráficos como los que muestran las figuras anteriores fueron los predominantes, dando poca información. 
 
 Se decidió entonces hacer foco en aquellos ejercicios en los que podían llegar a haber grupos mejor definidos. En un análisis posterior se exploró si estos grupos separaban de alguna manera a aquellos estudiantes que habían finalizado el curso de los que no. Para ello, se añadió la siguiente información a los gráficos anteriores:
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/heatmap-2-crear album.png}
@@ -455,22 +468,22 @@ Se decidió entonces hacer foco en aquellos ejercicios en los que podían llegar
         \label{fig:figura2}
     \end{subfigure}
     \caption{Ejemplos de ejercicios con grupos marcados, analizando las distancias entre las entregas de cada alumno con cada alumno con dendograma e indicador de qué estudiante finalizó el curso y cuál no.}
-    \label{fig:figuras_juntas}
+    \label{fig:figuras_juntas_tres}
 \end{figure}
 
 
-Se observó que con los grupos obtenidos no era posible distinguir entre los dos grupos deseados analizando los ejercicios de manera individual. Esto se ve evidenciado en que los alumnos que abandonaron el curso se encuentran entremezclados con los que sí lo hicieron. Esta tendencia (o falta de ella) se vio en todos los \emph{heatmaps} que se realizaron. 
+Se observó que, como muestra la Figura  \ref{fig:figuras_juntas_tres} , con los grupos obtenidos, no era posible distinguir entre los dos grupos deseados analizando los ejercicios de manera individual. Esto se ve evidenciado en que los alumnos que abandonaron el curso se encuentran entremezclados con los que sí lo hicieron. Esta tendencia (o falta de ella) se vio en todos los \emph{heatmaps} que se realizaron. 
 
 
 En un intento adicional por obtener información a partir de los ejercicios observados de manera atómica, se realizaron dos \emph{heatmaps} por ejercicio, ahora separando manualmente ambos grupos esperando ver sub-grupos diferenciados. Pero, como era de esperarse basándonos en el resultado anterior, la distribución de ambos grupos era similar, obteniéndose figuras muy similares a pesar de estar forzando esta distinción.
 
-\section{Cluster a cluster}
+\section{Evaluación del agrupamiento de manera global}
 Para esta sección, se analizaron varias métricas para evaluar el \emph{clustering} realizado. La evaluación rigurosa de los resultados del agrupamiento es fundamental por múltiples razones: permite validar la calidad de las agrupaciones obtenidas, asegura que los patrones descubiertos son significativos y no aleatorios, y facilita la comparación objetiva entre diferentes configuraciones del algoritmo. Además, dado que el \emph{clustering} es una técnica de aprendizaje no supervisado, estas métricas proporcionan una forma cuantitativa de verificar si los grupos identificados representan verdaderamente estructuras naturales en los datos.
 
-\subsection{ARI y NMI}
+\subsection{Métricas: ARI y NMI}
 Como se mencionó anteriormente, para cada ejercicio se realizó una \emph{clusterización} usando el método del codo. Para comparar las particiones generadas por cada ejercicio, se calcularon el ARI \cite{ari} y el NMI \cite{nmi} para todos los ejercicios analizados.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/ari.png}
@@ -484,27 +497,28 @@ Como se mencionó anteriormente, para cada ejercicio se realizó una \emph{clust
         \label{fig:figura2}
     \end{subfigure}
     \caption{\emph{Heatmaps} del ARI y NMI de todas las particiones generadas para cada ejercicio.}
-    \label{fig:figuras_juntas}
+    \label{ari_nmi}
 \end{figure}
 
-Los bajos valores de NMI sugieren que la información compartida entre las particiones detectadas y la referencia es mínima. Esto significa que las divisiones obtenidas por el algoritmo no están alineadas con las categorías del otro ejercicio con las que se las está comparando, lo que indica una posible falta de coherencia en la identificación de las comunidades o grupos en los datos.
+Los bajos valores de NMI, observables en la Figura \ref{ari_nmi}, sugieren que la información compartida entre las particiones detectadas y la referencia es mínima. Esto significa que las divisiones obtenidas por el algoritmo no están alineadas con las categorías del otro ejercicio con las que se las está comparando, lo que indica una posible falta de coherencia en la identificación de las comunidades o grupos en los datos.
 
 Por otro lado, los bajos valores de ARI implican que la similitud entre las asignaciones de elementos a \emph{clusters} es baja en comparación con la asignación de referencia (o, como es este caso, a la partición generada para otro ejercicio).
 
-\subsection{Índice de Jaccard}
-Para esta evaluación se analizaron las particiones de manera individual. Esto es, obviando a qué ejercicio pertenecían, se calculó el Índice de Similitud de Jaccard \cite{jaccard} para cada uno de los más de cien \emph{clusters} generados a lo largo de los 31 entregables, obteniéndose lo siguiente:
+\subsection{Métricas: Índice de Jaccard}
+Para esta evaluación se analizaron las particiones de manera individual. Esto es, obviando a qué ejercicio pertenecían, se calculó el Índice de Similitud de Jaccard \cite{jaccard} para cada uno de los más de cien \emph{clusters} generados a lo largo de los 31 entregables.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=0.7\textwidth]{imagenes/clusterxcluster.png}
     \caption{Índice de similitud de Jaccard entre todos los \emph{clusters} generados ejercicio a ejercicio.}
+     \label{jaccard}
 \end{figure}
 
 
 Mencionan Loginova et al. sobre la caracterización de dos grupos de alumnos (\emph{low} y \emph{high achievers}) a través de \emph{embeddings} usando PCA y \emph{Kmeans} que \emph{...la mayoría de los clusters no son fácilmente interpretables, ya que contienen una mezcla de ambas clases, siguiendo aproximadamente la distribución de las etiquetas objetivo}\cite{loginova2021embedding}.
 
 
-Cabe destacar que es razonable que entre \emph{clusters} de un mismo ejercicio, el Índice sea bajo. Esto puede ser un indicador de una buena separación entre los \emph{clusters}. Sin embargo, hubiera sido deseable que entre distintos ejercicios el Índice de Jaccard fuera alto, indicando que estas particiones se sostienen a lo largo del curso e, idealmente, un indicador de a qué grupo (ya sea deserción o finalización) del curso pertenecen los estudiantes. 
+Cabe destacar que es razonable que entre \emph{clusters} de un mismo ejercicio, como se puede ver en la Figura \ref{jaccard}, el Índice sea bajo. Esto puede ser un indicador de una buena separación entre los \emph{clusters}. Sin embargo, hubiera sido deseable que entre distintos ejercicios el Índice de Jaccard fuera alto, indicando que estas particiones se sostienen a lo largo del curso e, idealmente, un indicador de a qué grupo (ya sea deserción o finalización) del curso pertenecen los estudiantes. 
 
 \section{Comparación por clusters en común}
 
@@ -518,7 +532,7 @@ Alineados con la idea de encontrar un patrón a lo largo de todos los ejercicios
     \label{cluster}
 \end{figure}
 
-Se puede observar un grupo que comparte una gran cantidad de clusters en la esquina superior izquierda. Se buscó una manera de caracterizar este grupo, a partir de la matriz de \emph{clusters} compartidos generada para la realización del \emph{heatmap}. 
+Se puede observar en la Figura \ref{cluster} un grupo que comparte una gran cantidad de clusters en la esquina superior izquierda. Se buscó una manera de caracterizar este grupo, a partir de la matriz de \emph{clusters} compartidos generada para la realización del \emph{heatmap}. 
 
 
 \subsection{Clique máximo}\textbf{ }
@@ -560,7 +574,7 @@ A partir de este momento entonces se intentó caracterizar no a dos grupos si no
 
 \subsection{Separación por grupos}\textbf{ }
 
-Se analizó entonces qué ejercicios habían entregado cada grupo: 
+Se analizó entonces qué ejercicios habían entregado cada grupo, en pos de caracterizar, particularmente, al subgrupo mencionado en la sección anterior.  
 \begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.3\textwidth}
@@ -584,17 +598,18 @@ Se analizó entonces qué ejercicios habían entregado cada grupo:
         \label{fig:noclique}
     \end{subfigure}
     \caption{Entregas por alumno según el ejercicio, ordenados cronológicamente.}
-    \label{fig:figuras_juntas}
+    \label{entregas}
 \end{figure}
 
-Se puede observar entonces que los alumnos que componen este grupo de interés no solamente realizaron entregas similares a lo largo del curso si no que se trata del grupo que dejó de realizar entregas a partir del primer parcial (ejercicio \emph{medidas\_de\_especies}). Esto podría servir entonces como un indicador para saber quiénes continuarán pasada esta primer instancia de evaluación y quiénes no.
+Se puede observar entonces en la Figura  \ref{entregas} que los alumnos que componen este grupo de interés no solamente realizaron entregas similares a lo largo del curso si no que se trata del grupo que dejó de realizar entregas a partir del primer parcial (ejercicio \emph{medidas\_de\_especies}). Esto podría servir entonces como un indicador para saber quiénes continuarán pasada esta primer instancia de evaluación y quiénes no.
 
-En cuanto a los estudiantes que continuaron con las entregas pasada este examen y aquellos que sí terminaron el curso, se observó que los ejercicios entregados por ambos grupos son similares. Siguiendo el lineamiento de la Figura \ref {cluster}, se analizaron los grupos en común, ahora específicamente para distinguir entre los estudiantes que no abandonaron después del primer parcial.
+En cuanto a los estudiantes que continuaron con las entregas pasada este examen y aquellos que sí terminaron el curso, se observó que los ejercicios entregados por ambos grupos son similares. Siguiendo el lineamiento de la Figura \ref {cluster}, se analizaron los grupos en común, ahora específicamente para distinguir entre los estudiantes que no abandonaron después del primer parcial, como muestra la Figura \ref {cluster2}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{imagenes/clusters-no-13.png}
     \caption{Número de  \emph{clusters} en común de estudiantes que continuaron realizando entregas luego del primer parcial.}
+    \label{cluster2}
 \end{figure}
 
 Siendo difícil distinguir por este medio, evidenciado en la la falta de agrupaciones observables en la figura anterior, surgió la necesidad de adoptar nuevas medidas para mejorar estos resultados.
