@@ -616,7 +616,7 @@ Siendo difícil distinguir por este medio, evidenciado en la la falta de agrupac
 
 \section{Nuevos enfoques para mejorar los resultados}
 
-Para esta sección se intentó mejorar la separación entre aquellos alumnos que entregaron el primer examen parcial y aquellos que finalizaron el curso. 
+Para esta sección se intentó mejorar la separación entre aquellos alumnos que entregaron el primer examen parcial y aquellos que finalizaron el curso, entre quienes no fue posible distinguir en secciones anteriores. 
 
 \subsection{Eliminación del código repetido}
 
@@ -636,10 +636,10 @@ A partir del análisis anterior, se observó que, en algunos ejercicios, existí
         \label{fig:figura2}
     \end{subfigure}
     \caption{Código repetido a lo largo de los 31 entregables, ordenados por orden cronológico.}
-    \label{fig:figuras_juntas}
+    \label{repetidos}
 \end{figure}
 
-Como es de esperarse, en ejercicios más introductorios la proporción de código idéntico es mayor. Esto podría deberse a la simpleza del funcionamiento esperado de dichas funciones (como, por ejemplo, en el caso \emph{suma}).
+Como es de esperarse, evidenciado en la Figura \ref{repetidos}, en ejercicios más introductorios la proporción de código idéntico es mayor. Esto podría deberse a la simpleza del funcionamiento esperado de dichas funciones (como, por ejemplo, en el caso \emph{suma}).
 
 A continuación, se realizó un \emph{mapeo} entre alumnos con código idéntico y el programa en cuestión. Una vez realizado esto, se generó un nuevo \emph{dataset} sin dichas producciones. Se realizó entonces el procedimiento similar anterior: Reducción de la dimensionalidad de los datos con códigos únicos usando PCA $\rightarrow$ Aplicación de \emph{Kmeans} $\rightarrow$ Re-inclusión de los alumnos que habían sido \emph{mapeados} y eliminados anteriormente.
 
@@ -657,12 +657,12 @@ A continuación, se realizó un \emph{mapeo} entre alumnos con código idéntico
         \label{fig:figura4}
     \end{subfigure}
     \caption{\emph{Heatmaps} para el ejercicio \emph{obtener\_inclinaciones} de la unidad tres con el agrupamiento realizado con los datos originales y con los datos sin el código repetido.}
-    \label{fig:figuras_juntas}
+    \label{heatmaps_repetidos}
 \end{figure}
 
-Como se observa en la figura anterior, a modo de ejemplo, no se observó una diferencia significativa entre el \emph{clustering} original y aquél realizado contemplando lo mencionado anteriormente para ninguno de los 31 ejercicios.
+Como se observa en la Figura \ref{heatmaps_repetidos}, a modo de ejemplo, no se observó una diferencia significativa entre el \emph{clustering} original y aquél realizado contemplando lo mencionado anteriormente para ninguno de los 31 ejercicios.
 
-Como última medida, se observó la proporción \emph{cluster} a \emph{cluster} de alumnos que habían finalizado el curso, esperando ver una diferencia significativa:
+Como última medida, se observó la proporción \emph{cluster} a \emph{cluster} de alumnos que habían finalizado el curso, esperando ver una diferencia significativa, como muestra la Figura \label{porcentajes}.
 
 \begin{figure}[H]
     \centering
@@ -691,12 +691,13 @@ Para esta sección se le intentó hacer foco a ciertas características del cód
 
 
 \subsection{Usando \emph{embeddings} normalizados}
-Se realizó nuevamente un análisis análogo al de la Figura \ref{cluster}, obteniéndose los siguientes resultados:
+Se realizó nuevamente un análisis análogo al de la Figura \ref{cluster}, obteniéndose resultados análogos, como muestra la Figura \ref{normalizados}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{imagenes/cluster-normalized.png}
     \caption{Cantidad de \emph{clusters} compartidos por estudiante con \emph{embeddings} con normalizados.}
+    \label{normalizados}
 \end{figure}
 
 Esto no agregó información adicional por sobre lo realizado anteriormente. Tras haber replicado el procedimiento de los \emph{cliques}, estos retornaron resultados muy similares a los anteriores, teniendo como diferencia apenas un par de estudiantes por grupo. 
@@ -705,7 +706,7 @@ Esto no agregó información adicional por sobre lo realizado anteriormente. Tra
 
 \subsection{Fuzzy-2-means}
 
-Una característica útil de \emph{Fuzzy-2-means} es que este permite que algunos puntos pertenezcan \emph{parcialmente} a un grupo. En pos de distinguir entre aquellos estudiantes que habían finalizado el curso y a los que habían continuado más allá del primer parcial pero sin terminar la materia, se aplicó \emph{Fuzzy-2-means} a los datos originales: 
+Una característica útil de \emph{Fuzzy-2-means} es que este permite que algunos puntos pertenezcan \emph{parcialmente} a un grupo. En pos de distinguir entre aquellos estudiantes que habían finalizado el curso y a los que habían continuado más allá del primer parcial pero sin terminar la materia, se aplicó \emph{Fuzzy-2-means} a los datos originales como muestra la Figura \ref{fuzzy}.
 
 \begin{figure}[H]
     \centering
@@ -721,7 +722,7 @@ Una característica útil de \emph{Fuzzy-2-means} es que este permite que alguno
         \label{fig:figura6}
     \end{subfigure}
     \caption{Comparación entre el porcentaje de alumnos que finalizaron el curso \emph{cluster} a \emph{cluster} para los datos originales con distintos algoritmos de agrupación.}
-    \label{porcentajes}
+    \label{fuzzy}
 \end{figure}
 
 No se observaron alumnos a los cuales asignara parcialmente a un grupo, perteneciendo todos en su totalidad a alguno de los \emph{clusters} mostrados en la figura anterior. Si se observó un incremento en la cantidad de \emph{clusters} que, si bien son más homogéneos, se debe a que estos son muy pequeños, contando con una cantidad de apenas algunos estudiantes. Luego, este algoritmo no proporcionó información adicional por sobre el \emph{Kmeans} tradicional, para este caso particular.
@@ -759,9 +760,9 @@ Considerando que un vector de ceros podría no tener un significado semántico c
     \item \textbf{Para entregas ausentes}: se generó el \emph{embedding} de una función vacía contextualizada al ejercicio correspondiente.
 \end{itemize}
 
-Por ejemplo, para el ejercicio \emph{buscar\_u\_elemento}, la función vacía se definió como:
+Por ejemplo, para el ejercicio \emph{buscar\_u\_elemento}, la función vacía se definió como el descrito en la Figura \ref{vacia}. 
 
-\begin{lstlisting}[style=pythonstyle]
+\begin{lstlisting}[style=pythonstyle,  label={vacia}]
 def buscar_u_elemento():
     pass
 \end{lstlisting}
@@ -777,12 +778,13 @@ En la Figura \ref{fig: fill func}, se observa una tendencia similar a la del enf
 
 \subsection{Análisis de la proporción de entregas}
 
-Para comprender mejor la naturaleza de los agrupamientos observados, se realizó un análisis complementario examinando la proporción de entregas por ejercicio:
+Para comprender mejor la naturaleza de los agrupamientos observados, se realizó un análisis complementario examinando la proporción de entregas por ejercicio, como muestra la Figura \ref{entregas}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/proporcion - entregas (1).png}
     \caption{Distribución temporal de las entregas realizadas por ejercicio, expresada como proporción del total de estudiantes.}
+     \label{entregas}
 \end{figure}
 
 Al contrastar esta información con los resultados de agrupamiento (Figuras \ref{fig: zeros} y \ref{fig: fill func}), se reveló un patrón significativo: la aparente mejora en la clasificación está más relacionada con la tasa de participación que con las características intrínsecas de las soluciones. Por ejemplo, para el ejercicio \emph{experimento\_figus}, aunque el \emph{cluster\_0} contiene un 74\% de estudiantes que finalizaron el curso, este porcentaje aumenta al 80\% cuando se considera únicamente a quienes entregaron dicho ejercicio.
