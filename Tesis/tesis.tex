@@ -83,7 +83,7 @@
 \mainmatter
 \pagestyle{headings}
 
-%%%% ACA VA EL CONTENIDO DE LA TESIS
+
 
 \chapter{Introducción}
 \section{Motivación}
@@ -92,12 +92,13 @@ La programación, de manera directa e indirecta, forma parte de la vida cotidian
 
 Esto fue reflejado por el Consejo Federal de Educación cuando definió que se lleven a cabo las acciones necesarias para que se incorpore la enseñanza de la programación en la escolaridad obligatoria \emph{con el fin de fortalecer el desarrollo económico y social de nuestro país}~\cite{resolucionProgramar}.
 
-En particular, dentro de la Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires, la cantidad de alumnos que se inscriben a carreras afines a la programación, como lo es la Carrera en Ciencias de Datos, está en constante crecimiento: 
+En particular, como se puede observar en la Figura \ref{grafico-dov}, dentro de la Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires, la cantidad de alumnos que se inscriben a carreras afines a la programación, como lo es la Carrera en Ciencias de Datos, está en constante crecimiento.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{imagenes/inscriptos-por-carrera.jpg}
     \caption{Número de inscriptos por carrera en la FCEN - UBA ~\cite{DOV}}
+    \label{grafico-dov}
 \end{figure}
 
 En 2021, primera cohorte de inscripciones, alrededor de 300 personas se anotaron para comenzar sus estudios. En 2023, se anotaron más de 450 personas, a las cuales les correspondería cursar Introducción a la Programación en su primer año de carrera~\cite{primeros-datos}. Es entonces con este incremento en el alumnado que nace la necesidad de poder corregir código de manera rápida y eficiente. 
@@ -115,7 +116,7 @@ En su investigación usando \emph{code2vec},  Brigante  evaluó si el código fu
 
 \section{CodeBert}
 
-Se trata de un modelo preentrenado diseñado para entender y generar tanto lenguaje natural (NL) como lenguajes de programación (PL). Se basa en una arquitectura \emph{Transformer}, similar a \emph{BERT} y \emph{RoBERTa}, y fue entrenado usando datos bimodales (pares NL-PL) y unimodales (código o texto sin parejas), en seis lenguajes de programación (Python, Java, JavaScript, PHP, Ruby y Go) usando datos de repositorios públicos en GitHub. Esto último es particularmente relevante siendo que los cursos mencionados en la sección anterior, son dictados en el lenguaje Python.  . 
+Se trata de un modelo preentrenado diseñado para entender y generar tanto lenguaje natural (NL) como lenguajes de programación (PL). Se basa en una arquitectura \emph{Transformer}, similar a \emph{BERT} y \emph{RoBERTa}, y fue entrenado usando datos bimodales (pares NL-PL) y unimodales (código o texto sin parejas), en seis lenguajes de programación (Python, Java, JavaScript, PHP, Ruby y Go) usando datos de repositorios públicos en GitHub. Esto último es particularmente relevante siendo que los cursos mencionados en la sección anterior, son dictados en el lenguaje Python.
 
 Este genera  \emph{embeddings} o representaciones vectoriales de fragmentos de código mediante su arquitectura basada en \emph{Transformers}. Al alimentar un fragmento de código como entrada, \emph{CodeBERT} convierte el código en una secuencia de \emph{tokens}, que luego procesa a través de sus capas para producir una representación contextualizada para cada \emph{token}. Estas representaciones capturan tanto la sintaxis como la semántica del programa.
 
@@ -131,11 +132,13 @@ Utilizando el modelo \emph{CodeBERT}, proponemos caracterizar la trayectoria aca
 %% ...
 \chapter{Materiales y métodos}
 \section{Fuentes de datos}
-Los datos empleados para este análisis son el resultado de entregas de alumnos de la materia Programación en Python de la UNSAM, dictada de manera virtual en contexto de pandemia.  La materia contó con más de 1200 preinscriptos, incluyendo  un  40\%  de  personas  que  residen  fuera  del  Área  Metropolitana de Buenos Aires (AMBA).
+Los datos empleados para este análisis son el resultado de entregas de alumnos de la materia Programación en Python de la UNSAM, dictada de manera virtual en contexto de pandemia.  La materia contó con más de 1,200 preinscriptos, incluyendo  un  40\%  de  personas  que  residen  fuera  del  Área  Metropolitana de Buenos Aires (AMBA).
 
-Este se dictó con el objeto de ~\emph{enseñar los fundamentos del lenguaje Python orientado al manejo de datos, a la escritura de scripts y a una organización adecuada de los programas; enseñar  algunos  rudimentos  de  la  teoría  de  algoritmos,  incluyendo  conceptos  básicos  de  la teoría de la complejidad y algunas estructuras de datos no triviales; e introducir la programación orientada a objetos} ~\cite{unsam2020}.
+Este se dictó con el objeto de ~\emph{enseñar los fundamentos del lenguaje Python orientado al manejo de datos, a la escritura de \emph{scripts} y a una organización adecuada de los programas; enseñar  algunos  rudimentos  de  la  teoría  de  algoritmos,  incluyendo  conceptos  básicos  de  la teoría de la complejidad y algunas estructuras de datos no triviales; e introducir la programación orientada a objetos} ~\cite{unsam2020}.
 
 Con un total de 12 unidades y una duración de 3 meses, se realizó una evaluación permanente con entregas semanales de entre cuatro y seis ejercicios obligatorios por semana; llegando en total a  56  ejercicios  seleccionados  a  lo  largo  de  todo  el  curso.  Además  de  evaluar  estas  entregas semanales, se tomaron dos exámenes parciales de forma virtual y sincrónica con modalidad de opción múltiple lo que permitió una corrección automatizada. Si bien contamos con los datos sobre los resultados de la evaluación de este curso, no fueron considerados ya que se realizó foco en predecir quienes sencillamente lo habían finalizado. Para aprobar la materia resultó necesario haber realizado adecuadamente el 70\% de los  ejercicios  obligatorios  y  haber  aprobado  ambos  exámenes  parciales ~\cite{unsam2020}.
+
+El enfoque pedagógico de este curso, tanto en sus contenidos como en su metodología de enseñanza, tiene estrecha similitud con las materias introductorias que se dictan en nuestra facultad, particularmente con la cátedra de Introducción a la Programación. Esto nos permite inferir que los resultados de este análisis podrían ser extrapolables al contexto más amplio de la UBA.
 
 
 \subsection{Proceso ETL de los datos}
