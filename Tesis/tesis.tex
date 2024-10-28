@@ -104,6 +104,15 @@ En 2021, primera cohorte de inscripciones, alrededor de 300 personas se anotaron
 
 En un análisis exploratorio realizado por alumnos de la facultad basado en Censos de la UBA, Encuestas Docentes y el Sistema de Inscripciones, se observó que hay indicativos de que la deserción esté relacionada con el rendimiento del alumno en estas primeras materias ~\cite{analisis-exploratorio}. Por ello, consideramos importante la temprana detección de grupos más proclives a abandonar los cursos en cuestión. 
 
+\section{Modelos de lenguaje y el ambito estudiantil}
+
+En los últimos años se observaron muchos esfuerzos en desarrollar herramientas para la enseñanza de la programación que pudieran capturar las características individuales para potenciar el aprendizaje. Algunas de estas líneas han buscado usar la noción de similitud como cantidad de cambios a realizar en un código para proponer corregir errores en ejercicios de manera automática~\cite{gulwani2018automated}.
+
+Gracias a los avances tecnológicos previamente mencionados, es posible trabajar con \emph{embeddings} de manera \emph{más sencilla} y poder proyectar texto en un espacio multidimensional. Una aplicación fue capturar semejanzas entre entregas de estudiantes y, organizándolas en orden por similitud, facilitar la tarea de corrección~\cite{simgrade}. Además, este tipo de análisis sirve para identificar el conocimiento adquirido en temas específicos de un curso~\cite{brigante2020evaluation} como la evolución a lo largo del mismo~\cite{wu2018zeroshotlearningcode}. Esto abre la oportunidad para poder planificar intervenciones docentes en momentos tempranos que potencien el aprendizaje, que en cursos masivos antes resultaba imposible. 
+
+En su investigación usando \emph{code2vec},  Brigante  evaluó si el código fuente en sí mismo, sin ejecutar el código o evaluar su salida, era suficiente para estimar la calidad de las respuestas de los estudiantes. Los resultados sugieren que, aunque no siempre se alcanzaron los resultados esperados, el análisis del código fuente ofrece algunos indicios útiles para evaluar la calidad del desarrollo del estudiante ~\cite{brigante2020evaluation}.
+
+
 \section{CodeBert}
 
 Se trata de un modelo preentrenado diseñado para entender y generar tanto lenguaje natural (NL) como lenguajes de programación (PL). Se basa en una arquitectura \emph{Transformer}, similar a \emph{BERT} y \emph{RoBERTa}, y fue entrenado usando datos bimodales (pares NL-PL) y unimodales (código o texto sin parejas), en seis lenguajes de programación (Python, Java, JavaScript, PHP, Ruby y Go) usando datos de repositorios públicos en GitHub. Esto último es particularmente relevante siendo que los cursos mencionados en la sección anterior, son dictados en el lenguaje Python.  . 
@@ -114,13 +123,6 @@ El \emph{embedding} final para un fragmento completo puede obtenerse utilizando 
 
 \emph{CodeBERT} demostró un rendimiento sobresaliente en tareas de búsqueda de código y generación de documentación en comparación con modelos preentrenados solo en lenguaje natural o código~\cite{codeBert}. Esto, sumado al público y fácil acceso del modelo~\cite{codeBert-repo} , hicieron que se optara por él para el análisis de este trabajo.
 
-\section{CodeBert y el ámbito estudiantil}
-
-En los últimos años se observaron muchos esfuerzos en desarrollar herramientas para la enseñanza de la programación que pudieran capturar las características individuales para potenciar el aprendizaje. Algunas de estas líneas han buscado usar la noción de similitud como cantidad de cambios a realizar en un código para proponer corregir errores en ejercicios de manera automática~\cite{gulwani2018automated}.
-
-Gracias a los avances tecnológicos previamente mencionados, es posible trabajar con \emph{embeddings} de manera \emph{más sencilla} y poder proyectar texto en un espacio multidimensional. Una aplicación fue capturar semejanzas entre entregas de estudiantes y, organizándolas en orden por similitud, facilitar la tarea de corrección~\cite{simgrade}. Además, este tipo de análisis sirve para identificar el conocimiento adquirido en temas específicos de un curso~\cite{brigante2020evaluation} como la evolución a lo largo del mismo~\cite{wu2018zeroshotlearningcode}. Esto abre la oportunidad para poder planificar intervenciones docentes en momentos tempranos que potencien el aprendizaje, que en cursos masivos antes resultaba imposible. 
-
-En su investigación usando \emph{code2vec},  Brigante  evaluó si el código fuente en sí mismo, sin ejecutar el código o evaluar su salida, era suficiente para estimar la calidad de las respuestas de los estudiantes. Los resultados sugieren que, aunque no siempre se alcanzaron los resultados esperados, el análisis del código fuente ofrece algunos indicios útiles para evaluar la calidad del desarrollo del estudiante ~\cite{brigante2020evaluation}.
 
 \section{Propuesta}
 
