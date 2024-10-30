@@ -521,11 +521,15 @@ Para esta evaluación se analizaron las particiones de manera individual. Esto e
 Mencionan Loginova et al. sobre la caracterización de dos grupos de alumnos (\emph{low} y \emph{high achievers}) a través de \emph{embeddings} usando PCA y \emph{Kmeans} que \emph{...la mayoría de los clusters no son fácilmente interpretables, ya que contienen una mezcla de ambas clases, siguiendo aproximadamente la distribución de las etiquetas objetivo}\cite{loginova2021embedding}.
 
 
-Cabe destacar que es razonable que entre \emph{clusters} de un mismo ejercicio, como se puede ver en la Figura \ref{jaccard}, el Índice sea bajo. Esto puede ser un indicador de una buena separación entre los \emph{clusters}. Sin embargo, hubiera sido deseable que entre distintos ejercicios el Índice de Jaccard fuera alto, indicando que estas particiones se sostienen a lo largo del curso e, idealmente, un indicador de a qué grupo (ya sea deserción o finalización) del curso pertenecen los estudiantes. 
+Cabe destacar que es razonable que entre \emph{clusters} de un mismo ejercicio, como se puede ver en la Figura \ref{jaccard}, el Índice de Jaccard sea bajo. Esto puede ser un indicador de una buena separación entre los \emph{clusters}. Sin embargo, hubiera sido deseable que entre distintos ejercicios el Índice de Jaccard fuera alto, indicando que estas particiones se sostienen a lo largo del curso e, idealmente, un indicador de a qué grupo (ya sea deserción o finalización) del curso pertenecen los estudiantes. 
 
 \section{Comparación por clusters en común}
 
 Alineados con la idea de encontrar un patrón a lo largo de todos los ejercicios a analizar, se observaron ahora los \emph{clusters} en común para cada estudiante. Esto es, en vez de calcular \emph{cluster} a \emph{cluster} qué estudiantes tenían en común, se indagó sobre, estudiante a estudiante, qué \emph{clusters} tenían en común. 
+
+Para analizar la similitud en las agrupaciones de estudiantes a lo largo de todo el curso, se generó entonces un \emph{heatmap} que muestra la cantidad de \emph{clusters} compartidos entre cada par de ejercicios. En este gráfico, cada celda representa el número de agrupaciones comunes entre los estudiantes, lo que permite visualizar patrones de consistencia en las asignaciones de \emph{clusters} a lo largo de los distintos ejercicios. 
+
+Este enfoque facilita identificar si ciertos grupos de estudiantes tienden a mantenerse unidos en las diferentes particiones generadas o si las agrupaciones varían significativamente entre ejercicios.
 
 \begin{figure}[H]
 
@@ -535,7 +539,10 @@ Alineados con la idea de encontrar un patrón a lo largo de todos los ejercicios
     \label{cluster}
 \end{figure}
 
-Se puede observar en la Figura \ref{cluster} un grupo que comparte una gran cantidad de clusters en la esquina superior izquierda. Se buscó una manera de caracterizar este grupo, a partir de la matriz de \emph{clusters} compartidos generada para la realización del \emph{heatmap}. 
+Se puede observar en la Figura \ref{cluster} un grupo que comparte una gran cantidad de clusters en la esquina superior izquierda. Se buscó una manera de caracterizar este grupo, a partir de la matriz de \emph{clusters} compartidos generada para la realización del \emph{heatmap}.  
+
+
+
 
 
 \subsection{Clique máximo}\textbf{ }
@@ -565,19 +572,27 @@ El código garantiza que todos los estudiantes en el \emph{clique} resultante co
 
 Segundo, el algoritmo busca el \emph{clique} más grande en este grafo. Por definición, un \emph{clique} es un subgrafo completamente conectado, lo que significa que todos los nodos en el \emph{clique} están conectados directamente entre sí. Como en este grafo cada conexión representa compartir al menos \emph{n} \emph{clusters}, todos los estudiantes en el \emph{clique} resultante necesariamente comparten al menos \emph{n} \emph{clusters} con todos los demás miembros del \emph{clique}. Así, la combinación de la construcción selectiva del grafo y la búsqueda de \emph{cliques} asegura la propiedad deseada.
 
-En cuanto a la ejecución del algoritmo anterior, basados en la Figura \ref{cluster} se comenzó a iterar buscando el \emph{clique} más grande para cada \emph{n} comenzando desde el muy optimista número de más de veintitrés \emph{clusters} en común, descendientemente. Cabe destacar que estas corridas se hicieron por separado debido a los extensos tiempos de ejecución que estas llevaron y se eligió este número por representar ``más de la mitad del curso''. Más específico aún, se trata del número de la última entrega de la última unidad anterior al primer parcial (el ejercicio \emph{medidas\_especies}), momento para el cual sería deseable tener una noción de quiénes continuarán con el curso.   
+En cuanto a la ejecución del algoritmo anterior, basados en los datos con los que se generó la Figura \ref{cluster} se comenzó a iterar buscando el \emph{clique} más grande para cada \emph{n} comenzando desde el muy optimista número de más de veintitrés \emph{clusters} en común, descendientemente. Cabe destacar que estas corridas se hicieron por separado debido a los extensos tiempos de ejecución que estas llevaron y se eligió este número por representar ``más de la mitad del curso''. Más específico aún, se trata del número de la última entrega de la última unidad anterior al primer parcial (el ejercicio \emph{medidas\_especies}), momento para el cual sería deseable tener una noción de quiénes continuarán con el curso.   
 
 Como es de esperarse, a medida que se decrementa dicho \emph{n}, la cantidad de alumnos en el \emph{clique} aumenta ya que se vuelve más laxa la condición para formar parte de él. Notamos sin embargo que, a medida que se reducía el \emph{n}, la proporción de alumnos que \emph{no habían terminado el curso} dentro del \emph{clique}, incrementaba.  Esta tendencia se observó hasta alcanzar los 13 \emph{clusters} en común, número a partir del cual la proporción comenzaba a disminuir nuevamente.
 
-De este grupo de \emph{Clique-13} compuesto 222 estudiantes y representando un 27\% del alumnado, solo dos finalizaron el curso, siendo el restante 99\% del grupo más de la mitad (54\%) de los estudiantes que no terminaron el programa. 
+De este grupo, denominado \emph{Clique-13}, compuesto por 222 estudiantes y representando un 27\% del alumnado, solo dos finalizaron el curso. El 99\% restante de este grupo corresponde a más de la mitad (54\%) de los estudiantes que no completaron el programa.
 
-Habiendo entonces caracterizado a más de la mitad, fue necesario entender qué entregas eran las que habían realizado de manera similar con el objeto de poder estimar en un futuro qué ejercicios podrían servir de guía para realizar estas estimaciones. 
+Una vez caracterizada esta mayoría, fue necesario analizar qué entregas habían realizado de manera similar, con el objetivo de identificar en el futuro aquellos ejercicios que podrían servir de guía para realizar estas estimaciones.
 
-A partir de este momento entonces se intentó caracterizar no a dos grupos si no a tres: aquellos que pertenecían a este grupo apodado \emph{Clique-13} que, en su vasta mayoría, no habían finalizado el curso, aquellos estudiantes que no pertenecían a los anteriores pero tampoco habían terminado la materia y, finalmente, los que continuaron con el programa hasta su finalización.
+A partir de esto, se intentó clasificar a los estudiantes en tres grupos:
 
+\begin{enumerate}
+    \item Los pertenecientes a \emph{Clique-13}, que en su vasta mayoría no finalizaron el curso
+    \item Los estudiantes que no pertenecían a \emph{Clique-13} y tampoco completaron la materia
+    \item Aquellos que continuaron con el programa hasta su finalización
+\end{enumerate}
+
+\newpage
 \subsection{Separación por grupos}\textbf{ }
 
-Se analizó entonces qué ejercicios habían entregado cada grupo, en pos de caracterizar, particularmente, al subgrupo mencionado en la sección anterior.  
+Con el objetivo de caracterizar cada subgrupo, se analizaron los patrones de entrega de ejercicios de los tres grupos identificados. Los resultados de este análisis se visualizaron en el \emph{heatmap} de la Figura \ref{entregas}, donde se representa la distribución temporal de las entregas realizadas por cada grupo a lo largo del curso.
+
 \begin{figure}[H]
     \centering
     \begin{subfigure}[t]{0.3\textwidth}
@@ -604,7 +619,7 @@ Se analizó entonces qué ejercicios habían entregado cada grupo, en pos de car
     \label{entregas}
 \end{figure}
 
-Se puede observar entonces en la Figura  \ref{entregas} que los alumnos que componen este grupo de interés no solamente realizaron entregas similares a lo largo del curso si no que se trata del grupo que dejó de realizar entregas a partir del primer parcial (ejercicio \emph{medidas\_de\_especies}). Esto podría servir entonces como un indicador para saber quiénes continuarán pasada esta primer instancia de evaluación y quiénes no.
+Se puede observar entonces en la Figura  \ref{fig:clique} que los alumnos que componen este grupo de interés no solamente realizaron entregas similares a lo largo del curso si no que se trata del grupo que dejó de realizar entregas a partir del primer parcial (ejercicio \emph{medidas\_de\_especies}). Esto podría servir entonces como un indicador para saber quiénes continuarán pasada esta primer instancia de evaluación y quiénes no, basado únicamente en las producciones de código de alumnos.
 
 En cuanto a los estudiantes que continuaron con las entregas pasada este examen y aquellos que sí terminaron el curso, se observó que los ejercicios entregados por ambos grupos son similares. Siguiendo el lineamiento de la Figura \ref {cluster}, se analizaron los grupos en común, ahora específicamente para distinguir entre los estudiantes que no abandonaron después del primer parcial, como muestra la Figura \ref {cluster2}.
 
@@ -623,28 +638,26 @@ Para esta sección se intentó mejorar la separación entre aquellos alumnos que
 
 \subsection{Eliminación del código repetido}
 
-A partir del análisis anterior, se observó que, en algunos ejercicios, existía código idéntico entre distintos alumnos. Bajo la sospecha de que esto podía impactar negativamente el desempeño general de la asignación de grupos, se identificó la proporción de entregas exactamente iguales por función:
+A partir del análisis anterior, se observó que, en algunos ejercicios, existía código idéntico entre distintos alumnos. Bajo la sospecha de que esto podía impactar negativamente en el desempeño general de la asignación de grupos, se identificó la proporción de entregas exactamente iguales por función. Para ello se analizaron tanto la cantidad absoluta de producciones de código idéntico en nuestra base, como el porcentaje que esta representaba dentro de cada ejercicio, como se observa en la Figura \ref{repetidos}. 
 
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/unique-1.png}
         \caption{Cantidad total de código repetido y de código único por ejercicio}
-        \label{fig:figura1}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/unique-2.png}
         \caption{Proporción de código repetido y de código único por ejercicio}
-        \label{fig:figura2}
     \end{subfigure}
-    \caption{Código repetido a lo largo de los 31 entregables, ordenados por orden cronológico.}
+    \caption{Código repetido a lo largo de los 31 entregables, ordenados por orden cronológico. }
     \label{repetidos}
 \end{figure}
 
-Como es de esperarse, evidenciado en la Figura \ref{repetidos}, en ejercicios más introductorios la proporción de código idéntico es mayor. Esto podría deberse a la simpleza del funcionamiento esperado de dichas funciones (como, por ejemplo, en el caso \emph{suma}).
+Como es de esperarse, evidenciado en la Figura \ref{repetidos}, en ejercicios más sencillos la proporción de código idéntico es mayor. Esto podría deberse a la simpleza del funcionamiento esperado de dichas funciones (como, por ejemplo, en el caso \emph{suma}).
 
-A continuación, se realizó un \emph{mapeo} entre alumnos con código idéntico y el programa en cuestión. Una vez realizado esto, se generó un nuevo \emph{dataset} sin dichas producciones. Se realizó entonces el procedimiento similar anterior: Reducción de la dimensionalidad de los datos con códigos únicos usando PCA $\rightarrow$ Aplicación de \emph{Kmeans} $\rightarrow$ Re-inclusión de los alumnos que habían sido \emph{mapeados} y eliminados anteriormente.
+A continuación, se realizó un \emph{mapeo} entre alumnos con código idéntico y el programa en cuestión. Una vez realizado esto, se generó un nuevo \emph{dataset} sin dichas producciones. Se realizó entonces el procedimiento similar anterior: Reducción de la dimensionalidad de los datos con códigos únicos usando PCA $\rightarrow$ Aplicación de \emph{Kmeans} $\rightarrow$ Re-inclusión de los alumnos que habían sido \emph{mapeados} y eliminados anteriormente. Luego, se realizó una comparación ejercicio a ejercicio entre el \emph{heatmap} original y aquél producto del procedimiento anterior. A modo de ejemplo, en la Figura \ref{heatmaps_repetidos} podemos observar el par de gráficos para el ejercicio \emph{obtener\_inclinaciones} .
 
 \begin{figure}[H]
     \centering
@@ -672,13 +685,11 @@ Como última medida, se observó la proporción \emph{cluster} a \emph{cluster} 
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/porcentaje - original.png}
         \caption{Datos originales.}
-        \label{fig:figura5}
     \end{subfigure}
     \hfill
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/porcentaje - unniques.png}
         \caption{Datos sin código repetido.}
-        \label{fig:figura6}
     \end{subfigure}
     \caption{Comparación entre el porcentaje de alumnos que finalizaron el curso \emph{cluster} a \emph{cluster} para los datos originales y los datos después de haber \emph{mapeado} el código repetido.}
     \label{porcentajes}
