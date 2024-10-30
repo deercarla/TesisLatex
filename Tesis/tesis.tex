@@ -92,49 +92,49 @@ La programación, de manera directa e indirecta, forma parte de la vida cotidian
 
 Esto fue reflejado por el Consejo Federal de Educación cuando definió que se lleven a cabo las acciones necesarias para que se incorpore la enseñanza de la programación en la escolaridad obligatoria \emph{con el fin de fortalecer el desarrollo económico y social de nuestro país}~\cite{resolucionProgramar}.
 
-En particular, como se puede observar en la Figura \ref{grafico-dov}, dentro de la Facultad de Ciencias Exactas y Naturales de la Universidad de Buenos Aires, la cantidad de alumnos que se inscriben a carreras afines a la programación, como lo es la Carrera en Ciencias de Datos, está en constante crecimiento.
+En particular, como se puede observar en la Figura \ref{grafico-dov}, dentro de la Facultad de Ciencias Exactas y Naturales (FCEN) de la Universidad de Buenos Aires (UBA), la cantidad de alumnos que se inscriben a carreras afines a la programación, como lo es la Carrera en Ciencias de Datos, está en constante crecimiento.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{imagenes/inscriptos-por-carrera.jpg}
-    \caption{Número de inscriptos por carrera en la FCEN - UBA ~\cite{DOV}}
+    \caption{Cantidad de inscriptos por carrera en la FCEN - UBA ~\cite{DOV}}
     \label{grafico-dov}
 \end{figure}
 
-En 2021, primera cohorte de inscripciones, alrededor de 300 personas se anotaron para comenzar sus estudios. En 2023, se anotaron más de 450 personas, a las cuales les correspondería cursar Introducción a la Programación en su primer año de carrera~\cite{primeros-datos}. Es entonces con este incremento en el alumnado que nace la necesidad de poder corregir código de manera rápida y eficiente. 
+En 2021, primera cohorte de inscripciones a Ciencias de Datos, alrededor de 300 personas se anotaron para comenzar sus estudios. En 2023, se anotaron más de 450 personas a dicha carrera, a las cuales les correspondería cursar Introducción a la Programación en su primer año de carrera~\cite{primeros-datos}. Es entonces con este incremento en el alumnado que nace la necesidad de poder corregir la producción de código que generan los alumnos de manera rápida y eficiente. 
 
-En un análisis exploratorio realizado por alumnos de la facultad basado en Censos de la UBA, Encuestas Docentes y el Sistema de Inscripciones, se observó que hay indicativos de que la deserción esté relacionada con el rendimiento del alumno en estas primeras materias ~\cite{analisis-exploratorio}. Por ello, consideramos importante la temprana detección de grupos más proclives a abandonar los cursos en cuestión. 
+En un análisis exploratorio realizado por alumnos de la facultad basado en Censos de la FCEN-UBA, Encuestas Docentes y el Sistema de Inscripciones, se observó que hay indicios de que la deserción está relacionada con el rendimiento del alumno en estas primeras materias ~\cite{analisis-exploratorio}. Por ello, consideramos importante la temprana detección de grupos más proclives a abandonar los cursos en cuestión. 
 
 \section{Modelos de lenguaje y el ambito estudiantil}
 
 En los últimos años se observaron muchos esfuerzos en desarrollar herramientas para la enseñanza de la programación que pudieran capturar las características individuales para potenciar el aprendizaje. Algunas de estas líneas han buscado usar la noción de similitud como cantidad de cambios a realizar en un código para proponer corregir errores en ejercicios de manera automática~\cite{gulwani2018automated}.
 
-Gracias a los avances tecnológicos previamente mencionados, es posible trabajar con \emph{embeddings} de manera \emph{más sencilla} y poder proyectar texto en un espacio multidimensional. Una aplicación fue capturar semejanzas entre entregas de estudiantes y, organizándolas en orden por similitud, facilitar la tarea de corrección~\cite{simgrade}. Además, este tipo de análisis sirve para identificar el conocimiento adquirido en temas específicos de un curso~\cite{brigante2020evaluation} como la evolución a lo largo del mismo~\cite{wu2018zeroshotlearningcode}. Esto abre la oportunidad para poder planificar intervenciones docentes en momentos tempranos que potencien el aprendizaje, que en cursos masivos antes resultaba imposible. 
+Gracias a los avances tecnológicos previamente mencionados, es posible trabajar con \emph{embeddings} de manera \emph{más sencilla} y poder proyectar texto en un espacio multidimensional. Una aplicación fue capturar semejanzas entre entregas de estudiantes y, organizándolas en orden por similitud, facilitar la tarea de corrección~\cite{simgrade}. Además, este tipo de análisis sirve para identificar el conocimiento adquirido en temas específicos de un curso~\cite{brigante2020evaluation}, así como la evolución a lo largo del mismo~\cite{wu2018zeroshotlearningcode}. Esto abre la oportunidad para poder planificar intervenciones docentes en momentos tempranos que potencien el aprendizaje, que en cursos masivos antes resultaba imposible. 
 
 En su investigación usando \emph{code2vec},  Brigante  evaluó si el código fuente en sí mismo, sin ejecutar el código o evaluar su salida, era suficiente para estimar la calidad de las respuestas de los estudiantes. Los resultados sugieren que, aunque no siempre se alcanzaron los resultados esperados, el análisis del código fuente ofrece algunos indicios útiles para evaluar la calidad del desarrollo del estudiante ~\cite{brigante2020evaluation}.
 
 
 \section{CodeBert}
 
-Se trata de un modelo preentrenado diseñado para entender y generar tanto lenguaje natural (NL) como lenguajes de programación (PL). Se basa en una arquitectura \emph{Transformer}, similar a \emph{BERT} y \emph{RoBERTa}, y fue entrenado usando datos bimodales (pares NL-PL) y unimodales (código o texto sin parejas), en seis lenguajes de programación (Python, Java, JavaScript, PHP, Ruby y Go) usando datos de repositorios públicos en GitHub. Esto último es particularmente relevante siendo que los cursos mencionados en la sección anterior, son dictados en el lenguaje Python.
+Se trata de un modelo preentrenado diseñado para entender y generar tanto lenguaje natural (NL) como lenguajes de programación (PL). Se basa en una arquitectura \emph{Transformer}, similar a \emph{BERT} y \emph{RoBERTa}, y fue entrenado usando datos bimodales (pares NL-PL) y unimodales (código o texto sin parejas), en seis lenguajes de programación (Python, Java, JavaScript, PHP, Ruby y Go) usando datos de repositorios públicos en GitHub. Esto último es particularmente relevante siendo que los cursos mencionados en la (FCEN-UBA), son dictados en el lenguaje Python.
 
-Este genera  \emph{embeddings} o representaciones vectoriales de fragmentos de código mediante su arquitectura basada en \emph{Transformers}. Al alimentar un fragmento de código como entrada, \emph{CodeBERT} convierte el código en una secuencia de \emph{tokens}, que luego procesa a través de sus capas para producir una representación contextualizada para cada \emph{token}. Estas representaciones capturan tanto la sintaxis como la semántica del programa.
+\emph{CodeBERT} genera  \emph{embeddings} o representaciones vectoriales de fragmentos de código mediante su arquitectura basada en \emph{Transformers}. Al alimentar un fragmento de código como entrada,se convierte el código en una secuencia de \emph{tokens}, que se luego procesa a través de capas de redes neuronales para producir una representación contextualizada para cada \emph{token}. Estas representaciones logran capurar tanto la sintaxis como la semántica del programa.
 
 El \emph{embedding} final para un fragmento completo puede obtenerse utilizando el vector asociado al \emph{token} especial [CLS], que representa el significado agregado de la secuencia. Estos \emph{embeddings} pueden emplearse para tareas como búsqueda de código, clasificación, o generación de documentación, ya que contienen información relevante tanto del contenido del código como de su contexto.
 
-\emph{CodeBERT} demostró un rendimiento sobresaliente en tareas de búsqueda de código y generación de documentación en comparación con modelos preentrenados solo en lenguaje natural o código~\cite{codeBert}. Esto, sumado al público y fácil acceso del modelo~\cite{codeBert-repo} , hicieron que se optara por él para el análisis de este trabajo.
+\emph{CodeBERT} demostró un rendimiento sobresaliente en tareas de búsqueda de código y generación de documentación en comparación con modelos preentrenados solo en lenguaje natural o código~\cite{codeBert}. Esto, sumado al público y al fácil acceso del modelo~\cite{codeBert-repo} , hicieron que se optara por él para el análisis de este trabajo.
 
 
-\section{Propuesta}
+\section{Propuesta de la tesis}
 
-Utilizando el modelo \emph{CodeBERT}, proponemos caracterizar la trayectoria académica de los estudiantes de un curso introductorio de programación, basándonos exclusivamente en sus producciones de código. Esto puede ser particularmente útil para los docentes, ya que permite identificar a los grupos más vulnerables en la cursada y saber en cuáles concentrar sus esfuerzos.
+Utilizando el modelo \emph{CodeBERT}, proponemos caracterizar las trayectorias académica de los estudiantes de un curso introductorio de programación, basándonos exclusivamente en sus producciones de código. Esto puede ser particularmente útil para los docentes, ya que podría permitir identificar a los grupos más vulnerables en la cursada y saber en cuáles concentrar los esfuerzos.
 
 %% ...
 \chapter{Materiales y métodos}
 \section{Fuentes de datos}
-Los datos empleados para este análisis son el resultado de entregas de alumnos de la materia Programación en Python de la UNSAM, dictada de manera virtual en contexto de pandemia.  La materia contó con más de 1,200 preinscriptos, incluyendo  un  40\%  de  personas  que  residen  fuera  del  Área  Metropolitana de Buenos Aires (AMBA).
+Los datos empleados para este análisis son el resultado de entregas de alumnos de la materia Programación en Python de la Universidad Nacional de San Martín (UNSAM), dictada de manera virtual en contexto de pandemia.  La materia contó con más de 1,200 preinscriptos, incluyendo  un  40\%  de  personas  que  residen  fuera  del  Área  Metropolitana de Buenos Aires (AMBA).
 
-Este se dictó con el objeto de ~\emph{enseñar los fundamentos del lenguaje Python orientado al manejo de datos, a la escritura de \emph{scripts} y a una organización adecuada de los programas; enseñar  algunos  rudimentos  de  la  teoría  de  algoritmos,  incluyendo  conceptos  básicos  de  la teoría de la complejidad y algunas estructuras de datos no triviales; e introducir la programación orientada a objetos} ~\cite{unsam2020}.
+Esta materia se dictó con el objeto de ~\emph{enseñar los fundamentos del lenguaje Python orientado al manejo de datos, a la escritura de \emph{scripts} y a una organización adecuada de los programas; enseñar  algunos  rudimentos  de  la  teoría  de  algoritmos,  incluyendo  conceptos  básicos  de  la teoría de la complejidad y algunas estructuras de datos no triviales; e introducir la programación orientada a objetos} ~\cite{unsam2020}.
 
 Con un total de 12 unidades y una duración de 3 meses, se realizó una evaluación permanente con entregas semanales de entre cuatro y seis ejercicios obligatorios por semana; llegando en total a  56  ejercicios  seleccionados  a  lo  largo  de  todo  el  curso.  Además  de  evaluar  estas  entregas semanales, se tomaron dos exámenes parciales de forma virtual y sincrónica con modalidad de opción múltiple lo que permitió una corrección automatizada. Si bien contamos con los datos sobre los resultados de la evaluación de este curso, no fueron considerados ya que se realizó foco en predecir quienes sencillamente lo habían finalizado. Para aprobar la materia resultó necesario haber realizado adecuadamente el 70\% de los  ejercicios  obligatorios  y  haber  aprobado  ambos  exámenes  parciales ~\cite{unsam2020}.
 
@@ -143,16 +143,18 @@ El enfoque pedagógico de este curso, tanto en sus contenidos como en su metodol
 
 \subsection{Proceso ETL de los datos}
 
+Para desarrollar nuestra propia fuente de datos a partir de otras fuente, se utilizó el proceso ETL (Extract/Estracción, Transform/Transformación y/and Load/Carga) (ETL). A continuación se detalla cada una de estas tres etapas.
+
 \subsubsection{Extracción}\textbf{ }
 
-Los ejercicios fueron entregados a través de \emph{google-forms}. Las ejercitaciones de interés se descargaron de un \emph{google-drive} de uno de los docentes de la materia. De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las primeras 5, como se observa en la figura \ref{contenidos}. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del mismo. 
+Los ejercicios fueron entregados a través de \emph{google-forms}. Las ejercitaciones de interés se descargaron de un \emph{google-drive} de uno de los docentes de la materia. De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las primeras 5, como se observa en la figura \ref{contenidos}. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del curso. 
 
-A continuación se detallan los contenidos de las primeras unidades a analizar:
+En la figura  \ref{contenidos} se pueden observar  los contenidos de la materia a analizar.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{imagenes/modulos-curso.PNG}
-    \caption{Contenidos evaluados en las unidades extraídas para este análisis ~\cite{unsam2020}}
+    \caption{Contenidos evaluados en las unidades extraídas que fueron utilizadas como fuente de datos para el caso de estudio ~\cite{unsam2020}}
     \label{contenidos}
 \end{figure}
 
@@ -166,12 +168,12 @@ Se obtuvieron entonces en una primera instancia tres conjuntos de datos:
 \begin{itemize}
     \item \textbf{Anonimizador} que describe por entrada, para cada identificador, el identificador propio del ejercicio en cuestión, el nombre del archivo y la fecha y hora de entrega. Esto último es particularmente útil siendo que los alumnos podían realizar más de una entrega del mismo ejercicio.
     \item \textbf{Código} archivos \emph{.py} con los ejercicios con el mismo nombre que en la tabla anterior. Los nombres eran identificadores unívocos de los ejercicios lo que permitía vincularlos con el Anonimizador.
-    \item \textbf{Resultados} de la cursada, con el identificador del estudiante, la nota de las entregas, los dos parciales y el trabajo práctico y un booleano haciendo referencia a si este aprobó o no la cursada. Dentro de este conjunto se encuentran únicamente aquellos alumnos que finalizaron la materia.  
+    \item \textbf{Resultados} de la cursada, con el identificador del estudiante, la nota de las entregas, los dos parciales y el trabajo práctico y un valor \emph{booleano} haciendo referencia a si este aprobó o no la cursada. Dentro de este conjunto se encuentran únicamente aquellos alumnos que finalizaron la materia.  
 \end{itemize} 
 
 Webster et al. definen \emph{token} como una unidad básica en el procesamiento del lenguaje natural (NLP) que no necesita ser descompuesta en etapas posteriores del procesamiento. Puede ser un elemento como una palabra, un modismo o una expresión fija, que se trata como un átomo indivisible para los propósitos de la computación. La tokenización implica identificar estas unidades básicas en el texto, que son esenciales para realizar análisis o generación de texto posteriores~\cite{tokens}.
 
-El modelo de interés, \emph{CodeBERT}, tiene un límite de 512 \emph{tokens} para la entrada. Esto significa que cualquier secuencia de código a procesar tiene que ser truncada o dividida para que no exceda esta cantidad. Es debido a esta limitación del modelo que se tomó la decisión de realizar una limpieza del código, eliminando así los comentarios del mismo. Además, por ejercicio a entregar se contaba con una función \emph{objetivo}, que fue la que se consideró para la extracción. Cabe destacar que de realizarse testeos automatizados, aquellos archivos que no contaran con dichas funciones \emph{objetivo} (o estuvieran mal nomencladas), habrían fallado. Esto se consideró como un criterio adicional para discriminar entre qué datos incorporaríamos al análisis subsiguiente y cuáles no. 
+El modelo de interés, \emph{CodeBERT}, tiene un límite de 512 \emph{tokens} para la entrada. Esto significa que cualquier secuencia de código a procesar tiene que ser truncada o dividida para que no exceda esta cantidad. Es debido a esta limitación del modelo que se tomó la decisión de realizar una limpieza del código, eliminando así los comentarios del mismo. Además, por cada ejercicio a entregar se contaba con una función \emph{objetivo}, que fue la que se consideró para la extracción. Cabe destacar que de realizarse testeos automatizados, aquellos archivos que no contaran con dichas funciones \emph{objetivo} (o estuvieran mal nomencladas), habrían fallado. Esto se consideró como un criterio adicional para discriminar entre qué datos incorporaríamos al análisis subsiguiente y cuáles no. 
 
 \begin{figure}[H]
     \centering
@@ -180,15 +182,15 @@ El modelo de interés, \emph{CodeBERT}, tiene un límite de 512 \emph{tokens} pa
       \label{limpieza}
 \end{figure}
 
-Mencionan Glassman et al. en su trabajo \emph{OverCode: visualizing variation in student solutions to programming problems at scale} \cite{overcode} en relación a la limpieza de comentarios de código a analizar que \emph{...la variación en los comentarios es tan grande que agruparlos y resumirlos requerirá un diseño adicional significativo}. Este es otro motivo para eliminar el texto adicional de las producciones de alumnos para la limpieza realizada, como se observa en la Figura \ref{limpieza}.
+Mencionan Glassman et al. en su trabajo \emph{OverCode: visualizing variation in student solutions to programming problems at scale} \cite{overcode} en relación a la limpieza de comentarios de código a analizar que ``...la variación en los comentarios es tan grande que agruparlos y resumirlos requerirá un diseño adicional significativo'' . Este es otro motivo para eliminar el texto adicional de las producciones de alumnos para la limpieza realizada, como se observa en el ejemplo de la Figura \ref{limpieza}.
 
-Para el código en sí, se hizo uso de los \emph{Abstract Syntax Trees (AST)}. Un árbol de sintaxis abstracta es una representación estructurada de un programa, que retiene la estructura esencial del árbol de análisis sintáctico pero elimina los nodos innecesarios. Mantiene la precedencia y el significado de las expresiones, simplificando la representación al omitir la mayoría de los nodos de los símbolos no terminales\cite{cooper2011engineering}. Esto permitió un rápido filtrado de las llamadas funciones \emph{objetivo} y la eliminación de los comentarios de manera mucho más eficiente que utilizando expresiones regulares. Para lo mencionado anteriormente puede utilizarse la biblioteca \emph{ast} \cite{ast} en Python.
+Para el código en sí, se extrajo el  \emph{Abstract Syntax Trees (AST)}. Un árbol de sintaxis abstracta es una representación estructurada de un programa, que retiene la estructura esencial del árbol de análisis sintáctico pero elimina los nodos innecesarios. Mantiene la precedencia y el significado de las expresiones, simplificando la representación al omitir la mayoría de los nodos de los símbolos no terminales\cite{cooper2011engineering}. Esto permitió un rápido filtrado de las llamadas funciones \emph{objetivo} y la eliminación de los comentarios de manera mucho más eficiente que utilizando expresiones regulares. Para realizar el proceso mencionado anteriormente se utilizó la biblioteca \emph{ast} \cite{ast} en Python.
 
 
 
 \textbf{Código a embeddings}
 
-Como se mencionó anteriormente, se usó el modelo \emph{CodeBERT} para pasar del código a los \emph{embeddings}. Desde la biblioteca \emph{transformers} \cite{roberta_model} es posible importar tanto el \emph{tokenizador} como el modelo en sí con el código mostrado en el Listado \ref{lst:codebert_import}.
+Como se mencionó anteriormente, se usó el modelo \emph{CodeBERT} para pasar del código a los \emph{embeddings}. Desde la biblioteca \emph{transformers} \cite{roberta_model} es posible importar tanto el \emph{tokenizador} como el modelo en sí a partir del código mostrado en el Listado \ref{lst:codebert_import}.
 
 \begin{lstlisting}[language=Python, label={lst:codebert_import}, caption={Importación de CodeBERT}][H]
 from transformers import RobertaTokenizer, RobertaModel
@@ -200,7 +202,7 @@ model = RobertaModel.from_pretrained("microsoft/codebert-base")
 Luego, para cada archivo \emph{.py}, una vez limpiado como se mencionó en secciones anteriores, bastó con realizar el procedimiento descrito en el Algoritmo \ref{alg:embedding_calc} para obtener sus \emph{embeddings} a partir de \emph{CodeBERT}.
 
 \begin{algorithm}[H]
-\caption{Cálculo de Embeddings para Códigos}
+\caption{Generación de embeddings a partir de código fuente}
 \label{alg:embedding_calc}
 \begin{algorithmic}[1]
 \State Inicializar lista vacía \texttt{embeddings}
@@ -227,7 +229,7 @@ Además, se almacenaron los \emph{embeddings} normalizados. La normalización de
 
 Para almacenar los tres conjuntos de datos previamente mencionados, se optó por un tipo de base No-SQL, MongoDB que se creó localmente. Los motivos son varios:
 \begin{itemize}
-    \item \textbf{Flexibilidad en el esquema}: MongoDB, al ser una base de datos NoSQL, permite trabajar con un esquema flexible. Esto es especialmente útil en para este trabajo, ya que los datos presentan diferentes tipos y estructuras que pueden evolucionar con el tiempo. La flexibilidad de MongoDB permite la adaptación del modelo de datos sin necesidad de realizar cambios complejos en el esquema.
+    \item \textbf{Flexibilidad en el esquema}: MongoDB, al ser una base de datos NoSQL, permite trabajar con un esquema flexible. Esto es especialmente útil en este trabajo, ya que los datos presentan diferentes tipos y estructuras que pueden evolucionar con el tiempo. La flexibilidad de MongoDB permite la adaptación del modelo de datos sin necesidad de realizar cambios complejos en el esquema.
     
     \item \textbf{Facilidad de uso}: La sintaxis de MongoDB es sencilla e intuitiva, lo que simplifica su uso y permite concentrarse en el análisis y manipulación de los datos en lugar de en la configuración del entorno.
     
@@ -235,23 +237,23 @@ Para almacenar los tres conjuntos de datos previamente mencionados, se optó por
     
     \item \textbf{Manejo eficiente de grandes volúmenes de datos}: Dado que MongoDB almacena los datos en formato BSON (una representación binaria de JSON), es capaz de manejar grandes volúmenes de datos de manera eficiente.
     
-    \item \textbf{Capacidad de escalabilidad horizontal}: MongoDB permite la escalabilidad horizontal mediante la adición de nodos al clúster de base de datos. Esto es una ventaja importante si se prevé un crecimiento en el volumen de datos o en la demanda de las consultas. A sabiendas de que en un futuro podría agregarse información adicional por parte de los análisis posteriores, esto resulto particularmente útil \cite{MongoDB-docs}.
+    \item \textbf{Capacidad de escalabilidad horizontal}: MongoDB permite la escalabilidad horizontal mediante la adición de nodos al clúster de base de datos. Esto es una ventaja importante si se prevé un crecimiento en el volumen de datos o en la demanda de las consultas. A sabiendas de que en un futuro podría agregarse información adicional por parte de los análisis posteriores, esto resulta particularmente útil \cite{MongoDB-docs}.
     
     \item \textbf{Integración con herramientas de análisis y desarrollo}: MongoDB se integra fácilmente con una amplia variedad de herramientas de análisis de datos, lenguajes de programación y bibliotecas, lo que facilita el desarrollo de aplicaciones y análisis de datos en entornos como Python. En particular, a la hora de implementar un conector para la base de datos creada localmente, se usó la biblioteca \emph{pymongo} \cite{pymongo}.
 \end{itemize}
 
-Luego, la base de datos en cuestión se organizó con la estructura descrita en la Figura \ref{diagrama-base}.
+Luego, La base final obtenida finalmente, luego de aplicar el proceso de  ETL, se organizó con la estructura descrita en la Figura \ref{diagrama-base}.
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{imagenes/diagrama-base.png}
-    \caption{Esquema del diseño de la base de datos.}
+    \caption{Esquema del diseño de la base obtenida luego de aplicar el proceso ETL..}
     \label{diagrama-base}
 \end{figure}
 
-Donde la mayoría de los campos en cuestión fueron explicados en secciones anteriores. En cuanto a la colección \textbf{CodeAndEmbeddings}, se ahondará más adelante en la información restante.
+Donde gran parte de los campos contenidos en la base de datos de la Figura  \ref{diagrama-base} fueron ya explicados en secciones anteriores. En cuanto a la colección \textbf{CodeAndEmbeddings}, se ahondará más adelante.
 
-La base de datos para guardar todos los datos pertinentes a este estudio fue \emph{hosteada} localmente. Esta decisión resultó conveniente por varias razones: primero, permitió un acceso rápido y eficiente a los datos; segundo, facilitó el control total sobre la seguridad y la integridad de la información; y tercero, eliminó la dependencia de servicios externos, lo que mejoró la reproducibilidad del estudio.
+La base de datos para guardar todos los datos pertinentes a este estudio fue \emph{hosteada} localmente. Esta decisión resultó conveniente por varias razones: primero, permitió un acceso rápido y eficiente a los datos; segundo, facilitó el control total sobre la seguridad y la integridad de la información; y tercero, eliminó la dependencia de servicios externos.
 
 Además, el \emph{hosting} local de la base de datos proporcionó flexibilidad para realizar consultas complejas y actualizaciones en tiempo real, lo que fue crucial para el análisis iterativo de los datos durante el desarrollo del proyecto.
 
@@ -261,61 +263,60 @@ Además, el \emph{hosting} local de la base de datos proporcionó flexibilidad p
 
 El análisis de componentes principales (PCA) es una técnica de reducción de dimensionalidad que transforma datos de alta dimensión en un espacio de menor dimensión, conservando la mayor parte de la varianza original. Para \emph{embeddings} como los de \emph{CodeBERT}, es posible usar PCA para reducir la dimensionalidad de los vectores, preservando la información relevante y facilitando su visualización y análisis\cite{pca-musil}.
 
-PCA ofrece ventajas claras para \emph{embeddings}. Permite reducir los vectores a dos o tres dimensiones, permitiendo la detección de patrones en los datos \cite{pca-musil}. También ayuda a eliminar ruido y redundancias, mejorando la calidad del análisis posterior. Sin embargo, como señala Basirat \cite{pca-basirat}, tiene limitaciones con datos no normalmente distribuidos.
+PCA ofrece ventajas claras para \emph{embeddings}. Permite reducir los vectores a dos o tres dimensiones, permitiendo la detección de patrones en los datos \cite{pca-musil}. También ayuda a eliminar ruido y redundancias, mejorando la calidad del análisis posterior. Sin embargo, como señala Basirat \cite{pca-basirat}, tiene limitaciones con datos que no se ajustan a una distribución normal.
 
 Otra desventaja es el costo computacional de calcular la matriz de covarianza, especialmente para grandes volúmenes de datos. Esto puede ser un obstáculo en proyectos extensos de, por ejemplo, procesamiento del lenguaje natural\cite{pca-basirat}. Sin embargo, esta sigue siendo una herramienta valiosa para la reducción de dimensionalidad y la optimización en el manejo de \emph{embeddings}, motivo por el cual se usó para los análisis posteriores.
 
-Teniendo todo lo anterior en cuenta, se usó PCA para reducir la dimensionalidad de los \emph{embeddings} de 768 dimensiones generados. 
+Teniendo en cuenta las ventajas y limitaciones mencionadas anteriormente, se usó la técnica de  PCA para reducir la dimensionalidad de los \emph{embeddings}, los cuales en su estado original poseen 768 dimensiones
 
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.6\textwidth]{imagenes/varianza-explicada.png}
-    \caption{Varianza explicada en relación a la cantidad de componentes.}
+    \caption{Varianza explicada en base a la aplicación de PCA a los \emph{embeddings}.}
     \label{varianzaPCA}
 \end{figure}
 
-La varianza explicada observada en la Figura \ref{varianzaPCA} se la comparó con la de trabajos similares, como el de \emph{user2-code2vec: Embeddings for Profiling Students Based on Distributional Representations of Source Code} \cite{user2code} en el que proponen una metodología para perfilar a estudiantes individuales de ciencias de la computación según su diseño de programación, utilizando \emph{embeddings}. Azcona et al. mencionan que, hablando de los embeddings con los que estaban trabajando, \emph{Los vectores se transforman a 2 dimensiones utilizando PCA. La varianza retenida es muy baja (entre 2\% y 6\%)}. Cabe destacar igualmente que, si bien a raíz de lo anterior no se esperaba una varianza explicada muy alta, en el trabajo de Azcona et al. el tamaño de los vectores generados es casi veinte veces mayor que el de los generados por \emph{CodeBERT}.
+Luego de aplicar la técnica de PCA, la varianza explicada observada en la Figura \ref{varianzaPCA} se la comparó con la de trabajos similares, como el de \emph{user2-code2vec: Embeddings for Profiling Students Based on Distributional Representations of Source Code} \cite{user2code} en el que proponen una metodología para perfilar a estudiantes individuales de ciencias de la computación según su diseño de programación, utilizando \emph{embeddings}. Azcona et al. mencionan que, hablando de los embeddings con los que estaban trabajando, \emph{Los vectores se transforman a 2 dimensiones utilizando PCA. La varianza retenida es muy baja (entre 2\% y 6\%)}. Cabe destacar igualmente que, si bien a raíz de lo anterior no se esperaba una varianza explicada muy alta, en el trabajo de Azcona et al. el tamaño de los vectores generados es casi veinte veces mayor que el de los generados por \emph{CodeBERT}.
 
 \subsection{Extracción de información adicional}\label{subsec:extraccion}
 
 Sabemos que \emph{CodeBERT} captura la conexión semántica entre el lenguaje natural y el lenguaje de programación~\cite{codeBert}. En un análisis preliminar se investigó qué factores podían llegar a generar \emph{embeddings} diferentes para códigos semánticamente similares o idénticos. Con esto se esperaba encontrar características en el código sobre las cuales hacer foco para mejorar las futuras predicciones, de ser necesario. 
 
-Para ello, se tomó una producción de código de un alumno al azar del ejercicio de la primer unidad, \emph{tiene\_a}, el cual debeía retornar $True$ de contener el \emph{string} a analizar la letra \emph{a}. A este se le hicieron pequeñas modificaciones, como, por ejemplo:
+Para ello, se tomó una producción de código de un alumno al azar del ejercicio de la primer unidad, \emph{tiene\_a}, el cual debería retornar $True$ de contener el \emph{string} de entrada la letra \emph{a}. A este se le hicieron pequeñas modificaciones, como, por ejemplo:
 \begin{enumerate}
     \item Modificación del nombre de las variables.
-    \item Cambio del $while$ en el recorrido por un $for$.
-    \item Inversión en el recorrido de la secuencia (en vez de principio a fin de fin a principio).
-    \item Agregado de prints.
+    \item Cambio del $while$ por un $for$.
+    \item Inversión en el recorrido de la secuencia (en vez de principio a fin, de fin a principio).
+    \item Inclusión de prints.
     \item Simplificación del código.
 \end{enumerate}
-Entre otras.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/codigo-similar.png}
-    \caption{Representación de los dos primeros componentes de diferentes variantes del ejercicio \emph{tiene\_a}.}
+    \caption{Representación de los dos primeros componentes de PCA sobre los \emph{embeddings} de diferentes variantes del ejercicio \emph{tiene\_a}, donde el código original es el segundo de izquierda a derecha. El pequeño grupo formado alrededor de este corresponde a variaciones muy leves en el código, como inversión en el recorrido de la lista o cambio en el nombre de variables.}
      \label{variaciones-codigo}
 \end{figure}
 
-Como era de esperarse, como muestra la Figura \ref{variaciones-codigo}, se observó que variantes muy similares del código (como, por ejemplo las propuestas por los ítems 1) y 3)) no se distanciaban mucho las unas de las otras. En la figura anterior se puede observar también una clara tendencia en cuanto a la longitud del código y su representación en el plano. Además, diferencias cómo el uso de $for$ (los tres puntos comprendidos entre las dos cajas rojas) y el $while$ (aquellos comprendidos entre las cajas violetas) o la ausencia de ambos, tuvieron también un impacto significativo en los \emph{embeddings} y su representación en el plano de dos dimensiones.
+Como era de esperarse, como muestra la Figura \ref{variaciones-codigo}, se observó que variantes muy similares del código (como, por ejemplo las propuestas por los ítems 1) y 3)) no se distanciaban mucho las unas de las otras. En la figura se puede observar también una clara tendencia en cuanto a la longitud del código y su representación en el plano. Además, diferencias cómo el uso de $for$ (los tres puntos comprendidos entre las dos cajas rojas) y el $while$ (aquellos comprendidos entre las cajas violetas) o la ausencia de ambos, tuvieron también un impacto significativo en los \emph{embeddings} y su representación en el plano de dos dimensiones.
 
-A partir de lo anterior y, como se refleja en la Figura \ref{diagrama-base}, se tuvieron en cuenta para caracterizar cada código información como su uso de $for$, $while$, la cantidad de $if$ y la cantidad de líneas dentro de otras que surgieron a raíz de repetir el análisis anterior con otros ejercicios.
+A partir de lo anterior, siendo que utilizar $fos$ \emph{vs} $while$ puede cambiar la posición que ocupa el punto en el gráfico \ref{variaciones-codigo}, entonces se decidió incorporar el uso o no de estas primitivas a la tabla (ver Figura \ref{diagrama-base}, tabla CodeAndEmbeddings). No sólo hemos incorporado el dato de si se ha utilizado $for$/$while$ sino que también hemos incorporado el dato de la cantidad de if que se ha utilizado, la cantidad de líneas que posee el códig ofuente, entre otros datos.
 
 \subsection{Agrupamiento}
 
-La próxima sección abordará las técnicas de \emph{clustering} implementadas para agrupar estudiantes, basándose en los \emph{embeddings} y la reducción dimensional mediante PCA previamente obtenidos.
+La próxima sección abordará las técnicas de \emph{clustering} implementadas para agrupar estudiantes, basándose en los \emph{embeddings} y la reducción de dimensionalidad mediante la técnica de PCA mediante PCA.
 
 \subsubsection{Kmeans}\textbf{ } 
 
 El algoritmo \emph{K-means} es una técnica de aprendizaje no supervisado ampliamente utilizada para resolver problemas de agrupamiento. Funciona dividiendo un conjunto de datos en \emph{k} \emph{clusters} ó grupos distintos. 
 
-Primero, el algoritmo selecciona aleatoriamente \emph{k} centroides iniciales, que representan los centros de los \emph{clusters}. Luego, asigna cada punto de datos al \emph{cluster} cuyo centro esté más cercano, basado en la distancia euclidiana. Una vez asignados todos los puntos, se recalculan los centroides como la media de los puntos en cada \emph{cluster}. Este proceso de asignación y actualización de centroides se repite iterativamente hasta que las posiciones de los centroides ya no cambien significativamente, indicando que el algoritmo convergió. \cite{kmeans}
+Primero, el algoritmo selecciona aleatoriamente \emph{k} centroides iniciales, que representan los centros de los \emph{clusters}. Luego, asigna a cada punto de datos al \emph{cluster} cuyo centro esté más cercano, basado en la distancia euclidea. Una vez asignados todos los puntos, se recalculan los centroides como la media de los puntos en cada \emph{cluster}. Este proceso de asignación y actualización de centroides se repite iterativamente hasta que las posiciones de los centroides ya no cambien significativamente, indicando que el algoritmo convergió. \cite{kmeans}
 
-Sin embargo, el algoritmo \emph{K-means} presenta muchos desafíos que afectan negativamente su rendimiento. En primer lugar, en el proceso de inicialización del algoritmo uno debe especificar \emph{a priori} el número de grupos en un conjunto de datos dado (el número \emph{k}), mientras que los centros de los grupos iniciales se seleccionan aleatoriamente. Además, el rendimiento del algoritmo es susceptible a la selección de este grupo inicial y, para conjuntos de datos grandes, determinar el número óptimo de grupos con el que comenzar se vuelve desafiante. Más aún, la selección aleatoria de los centros de los grupos iniciales a veces resulta en una convergencia local mínima debido a que se trata de un algoritmo \emph{greedy}. \cite{kmeans-limitaciones}.
+Sin embargo, el algoritmo \emph{K-means} presenta muchos desafíos que afectan negativamente su rendimiento. En primer lugar, en el proceso de inicialización del algoritmo uno debe especificar \emph{a priori} la cantidad de grupos en un conjunto de datos dado (el número \emph{k}), mientras que los centros de los grupos iniciales se seleccionan aleatoriamente. Además, el rendimiento del algoritmo es susceptible a la selección de este grupo inicial y, para conjuntos de datos grandes, determinar el número óptimo de grupos con el que comenzar se vuelve desafiante. Más aún, la selección aleatoria de los centros de los grupos iniciales a veces resulta en una convergencia local mínima debido a que se trata de un algoritmo \emph{greedy}. \cite{kmeans-limitaciones}.
 
-Este algoritmo y otras variantes que serán mencionadas a continuación se utilizará para intentar discriminar entre qué alumnos finalizarán o no el curso. 
+Este algoritmo y otras variantes que serán mencionadas a continuación se utilizaran para intentar discriminar entre qué alumnos finalizarán o no el curso. 
 
-\subsubsection{Elección del número de clusters} \textbf{ } 
+\subsubsection{Elección del número de \emph{clusters}} \textbf{ } 
 
 
 Teniendo en cuenta las limitaciones mencionadas anteriormente, se eligió el \textbf{método del codo} para elegir el número \emph{k} a la hora de realizar los \emph{clusterings} que detallaremos en secciones posteriores. Esta es una técnica visual que ayuda a optimizar el número de grupos a utilizar en \emph{K-means}. Su objetivo principal es ayudar a tomar una decisión informada sobre cuántos \emph{clusters} elegir.
@@ -324,7 +325,7 @@ El método funciona de la siguiente manera:
 \begin{enumerate}
     \item Se ejecuta el algoritmo de \emph{clustering} varias veces con diferentes números de \emph{clusters}.
     \item Para cada \emph{k}, se calcula la suma de los errores cuadráticos dentro del \emph{cluster} (\emph{WCSS}, por sus siglas en inglés).
-    \item Se grafica el \emph{WCSS} en función del número de clústeres.
+    \item Se grafica el \emph{WCSS} en función del número de \emph{clusters}.
     \item Se busca un ``codo'' en el gráfico, que es un punto donde la disminución del \emph{WCSS} comienza a nivelarse.
 \end{enumerate}
 
@@ -337,9 +338,9 @@ El método es beneficioso porque optimiza la elección del número de clusters e
 
 El algoritmo \emph{Fuzzy-c-means} es una técnica de agrupamiento que optimiza una función objetivo. Esta función minimiza la distancia entre los puntos de datos y los centros de los \emph{clusters}, ponderada por los valores de pertenencia difusa. El algoritmo itera entre actualizar los valores de pertenencia y los centros de los \emph{clusters} hasta alcanzar la convergencia. 
 
-Entre las ventajas del \emph{Fuzzy-c-means} se encuentra su capacidad para permitir la pertenencia parcial a múltiples \emph{clusters}, lo que lo hace más flexible que los métodos de agrupamiento tradicionales. Además, maneja bien \emph{clusters} de formas no esféricas y es más robusto ante \emph{outliers} en comparación con el algoritmo \emph{k-means} que mencionamos anteriormente.
+Entre las ventajas del \emph{Fuzzy-c-means} se encuentra su capacidad para permitir la pertenencia parcial a múltiples \emph{clusters}, lo que lo hace más flexible que los métodos de agrupamiento tradicionales. Además, maneja bien \emph{clusters} de formas no esféricas y es más robusto ante \emph{outliers} en comparación con el algoritmo \emph{K-means} que mencionamos anteriormente.
 
-Sin embargo, este algoritmo, al igual que \emph{K-means},  \emph{Fuzzy-c-means} también requiere que se especifique el número de grupos \emph{a priori}. En consecuencia, también es sensible a la inicialización, lo que puede afectar los resultados finales. Además, tiene un mayor costo computacional en comparación con \emph{K-means}.
+Sin embargo, \emph{Fuzzy-c-means} , al igual que \emph{K-means},  también requiere que se especifique el número de grupos \emph{a priori}. En consecuencia, también es sensible a la inicialización, lo que puede afectar los resultados finales. Además, tiene un mayor costo computacional en comparación con \emph{K-means}.
 
 Chan et al. en ``Clustering of clusters'' introducen una variante llamada \emph{Recursive Fuzzy-2-Mean} (RF2M), que extiende el \emph{Fuzzy-c-means} para agrupar \emph{clusters} existentes. Esta variante introduce una tercera clase para los puntos que no encajan bien en ninguno de los dos \emph{clusters} principales, añadiendo así más flexibilidad al método original \cite{fuzzy-k-means}.
 
@@ -366,7 +367,7 @@ La fórmula para calcular el NMI es la siguiente:
 \text{NMI} = \frac{2 \cdot I(X; Y)}{H(X) + H(Y)}
 \]
 
-donde \( I(X; Y) \) representa la información mutua entre las particiones \(X\) y \(Y\), y \( H(X) \) y \( H(Y) \) son las entropías de \(X\) y \(Y\), respectivamente. Esta métrica es utilizada para comparar las divisiones obtenidas por diferentes métodos y verificar qué tan similares son a la partición de referencia, proporcionando una medida cuantitativa de la precisión en la detección de comunidades \cite{nmi}.
+donde \( I(X; Y) \) representa la información mutua entre las particiones \(X\) y \(Y\), y \( H(X) \) y \( H(Y) \) son las entropías de \(X\) e \(Y\), respectivamente. Esta métrica es utilizada para comparar las divisiones obtenidas por diferentes métodos y verificar qué tan similares son a la partición de referencia, proporcionando una medida cuantitativa de la precisión en la detección de comunidades \cite{nmi}.
 
 \textbf{Similitud de Jaccard}
 
@@ -406,12 +407,13 @@ Finalmente, mencionamos que los estudiantes tenían la posibilidad de entregar u
 \chapter{Resultados y discusión}
 \section{Análisis individual de los ejercicios}
 
-En una primera instancia, se evaluó ejercicio a ejercicio entregable la distancia euclidiana entre los puntos generados después de realizar la mencionada reducción de la dimensionalidad para los alumnos en cada una de las 31 funciones. Con esto se esperaba ver grupos bien definidos y una correlación en cada instancia de evaluación entre ellos y los grupos de interés (esto es, estudiantes que terminaron \emph{vs} los que no). 
+En una primera instancia, se evaluó para cada uno de los ejercicios entregables la distancia euclidiana entre los puntos generados después de realizar la mencionada reducción de la dimensionalidad para los alumnos en cada una de las 31 funciones entregadas. Con esto se esperaba ver grupos bien definidos y una correlación en cada instancia de evaluación entre ellos y los grupos de interés (esto es, estudiantes que terminaron \emph{vs} los que no). 
 
 Para ello, se graficaron varios \emph{heatmaps} esperando ver en ellos distintos grupos de alumnos. 
 
-Se observó que, en ejercicios que podrían considerarse más sencillos como, por ejemplo, el ejercicio \emph{tirar} de la unidad 5 que consistia en obtener el resultado de tirar un dado equilibrado de seis caras \emph{n} veces, o \emph{crear\_album} de la misma unidad que consistía en crear un ``álbum'' (un vector de ceros) de \emph{n} figuritas, habían grupos claramente definidos, como se observa en la Figura \ref{fig:figuras_juntas}.
-\begin{figure}
+Se observó que, en ejercicios que podrían considerarse más sencillos como, por ejemplo, el ejercicio \emph{tirar} de la unidad 5 que consistia en obtener el resultado de tirar un dado equilibrado de seis caras \emph{n} veces, o \emph{crear\_album} de la misma unidad que consistía en crear un ``álbum'' (un vector de ceros) de \emph{n} figuritas, habían grupos claramente definidos, como se observa en la Figura \ref{fig:figuras_juntas}. Dada la simpleza de los ejercicios en cuestión, no se encontraron grandes variaciones de código en general para este tipo de entregas. 
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/heatmap-1-crear album.png}
@@ -429,7 +431,9 @@ Se observó que, en ejercicios que podrían considerarse más sencillos como, po
 \end{figure}
 
 
-\begin{figure}
+En otros ejemplos, como los de la Figura \ref{fig:figuras_juntas_dos}, en los cuales los ejercicios podían llegar a presentar una mayor dificultad o ambigüedad para los alumnos, los grupos no fueron tan claros. Este es el caso, por ejemplo, de los ejercicios \emph{es\_generala} de la unidad cinco y \emph{propagar} de la unidad cuatro. Para la primera, el comportamiento esperado para la función era que retornara \emph{True} si y sólo si los cinco dados de la lista tirada eran iguales. Para el segundo mencionado, los estudiantes debían escribir una función que recibiera una lista de fósforos (0: nuevo, 1: encendido, -1: carbonizado) y devolviera la lista con el fuego propagado a los fósforos nuevos adyacentes.
+
+\begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/heatmap-1-propagar.png}
@@ -446,15 +450,13 @@ Se observó que, en ejercicios que podrían considerarse más sencillos como, po
     \label{fig:figuras_juntas_dos}
 \end{figure}
 
-En otros ejemplos, como los de la Figura \ref{fig:figuras_juntas_dos}, en los cuales los ejercicios podían llegar a presentar una mayor dificultad o ambigüedad para los alumnos, los grupos no fueron tan claros. Este es el caso, por ejemplo, de los ejercicios \emph{es\_generala} de la unidad cinco y \emph{propagar} de la unidad cuatro. Para la primera, el comportamiento esperado para la función era que retornara \emph{True} si y sólo si los cinco dados de la lista tirada eran iguales. Para el segundo mencionado, los estudiantes debían escribir una función que recibiera una lista de fósforos (0: nuevo, 1: encendido, -1: carbonizado) y devolviera la lista con el fuego propagado a los fósforos nuevos adyacentes.
-
 
 
 Cabe destacar que, a excepción de otros ejercicios típicamente introductorios en cursos como estos (como \emph{sumar}, \emph{máximo}, \emph{mínimo} dentro de otros), los gráficos como los que muestran las figuras anteriores fueron los predominantes, dando poca información. 
 
-Se decidió entonces hacer foco en aquellos ejercicios en los que podían llegar a haber grupos mejor definidos. En un análisis posterior se exploró si estos grupos separaban de alguna manera a aquellos estudiantes que habían finalizado el curso de los que no. Para ello, se añadió la siguiente información a los gráficos anteriores:
+Se decidió entonces hacer foco en aquellos ejercicios en los que podían llegar a haber grupos mejor definidos. En un análisis posterior se exploró si estos grupos separaban de alguna manera a aquellos estudiantes que habían finalizado el curso de los que no. Para ello, se añadió como información adicional a las Figuras anteriores, quiénes habían finalizado el curso (\emph{id\_anon}) y quiénes no, como muestra la Figura  \ref{fig:figuras_juntas_tres}.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/heatmap-2-crear album.png}
@@ -472,7 +474,7 @@ Se decidió entonces hacer foco en aquellos ejercicios en los que podían llegar
 \end{figure}
 
 
-Se observó que, como muestra la Figura  \ref{fig:figuras_juntas_tres} , con los grupos obtenidos, no era posible distinguir entre los dos grupos deseados analizando los ejercicios de manera individual. Esto se ve evidenciado en que los alumnos que abandonaron el curso se encuentran entremezclados con los que sí lo hicieron. Esta tendencia (o falta de ella) se vio en todos los \emph{heatmaps} que se realizaron. 
+Se observó que, como muestra la Figura  \ref{fig:figuras_juntas_tres} , con los grupos obtenidos, no era posible distinguir entre los dos grupos deseados analizando los ejercicios de manera individual. Esto se ve evidenciado en que los alumnos que abandonaron el curso se encuentran entremezclados con los que sí lo hicieron. Esta tendencia (o falta de ella) se vio en todos los \emph{heatmaps} que se realizaron. Tampoco fue posible extraer (al menos todavía) cuál fue el criterio por el cual se agruparon esos alumnos.
 
 
 En un intento adicional por obtener información a partir de los ejercicios observados de manera atómica, se realizaron dos \emph{heatmaps} por ejercicio, ahora separando manualmente ambos grupos esperando ver sub-grupos diferenciados. Pero, como era de esperarse basándonos en el resultado anterior, la distribución de ambos grupos era similar, obteniéndose figuras muy similares a pesar de estar forzando esta distinción.
@@ -481,9 +483,9 @@ En un intento adicional por obtener información a partir de los ejercicios obse
 Para esta sección, se analizaron varias métricas para evaluar el \emph{clustering} realizado. La evaluación rigurosa de los resultados del agrupamiento es fundamental por múltiples razones: permite validar la calidad de las agrupaciones obtenidas, asegura que los patrones descubiertos son significativos y no aleatorios, y facilita la comparación objetiva entre diferentes configuraciones del algoritmo. Además, dado que el \emph{clustering} es una técnica de aprendizaje no supervisado, estas métricas proporcionan una forma cuantitativa de verificar si los grupos identificados representan verdaderamente estructuras naturales en los datos.
 
 \subsection{Métricas: ARI y NMI}
-Como se mencionó anteriormente, para cada ejercicio se realizó una \emph{clusterización} usando el método del codo. Para comparar las particiones generadas por cada ejercicio, se calcularon el ARI \cite{ari} y el NMI \cite{nmi} para todos los ejercicios analizados.
+Como se mencionó anteriormente, para cada ejercicio se realizó una \emph{clusterización} usando el método del codo. En el análisis de las agrupaciones generadas, se evaluó el grado de correspondencia entre las particiones obtenidas para cada ejercicio con las de los demás ejercicios. Para esto, se utilizaron dos métricas principales: el \emph{Indice de Información Mutua Normalizado} (NMI) \cite{nmi} y el \emph{Indice Rand Ajustado} (ARI) \cite{ari}. Los resultados de estas comparaciones pueden observarse en la Figura \ref{ari_nmi}, donde los valores de NMI y ARI para cada ejercicio se representan en relación con los demás.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
         \includegraphics[width=\linewidth]{imagenes/ari.png}
@@ -496,9 +498,10 @@ Como se mencionó anteriormente, para cada ejercicio se realizó una \emph{clust
         \caption{NMI}
         \label{fig:figura2}
     \end{subfigure}
-    \caption{\emph{Heatmaps} del ARI y NMI de todas las particiones generadas para cada ejercicio.}
+    \caption{\emph{Heatmaps} del ARI y NMI de todas las particiones generadas para cada ejercicio para evaluar su grado de correspondencia con los demás ejercicios.}
     \label{ari_nmi}
 \end{figure}
+
 
 Los bajos valores de NMI, observables en la Figura \ref{ari_nmi}, sugieren que la información compartida entre las particiones detectadas y la referencia es mínima. Esto significa que las divisiones obtenidas por el algoritmo no están alineadas con las categorías del otro ejercicio con las que se las está comparando, lo que indica una posible falta de coherencia en la identificación de las comunidades o grupos en los datos.
 
