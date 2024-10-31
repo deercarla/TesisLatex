@@ -319,19 +319,19 @@ Este algoritmo y otras variantes que serán mencionadas a continuación se utili
 \subsubsection{Elección del número de \emph{clusters}} \textbf{ } 
 
 
-Teniendo en cuenta las limitaciones mencionadas anteriormente, se eligió el \textbf{método del codo} para elegir el número \emph{k} a la hora de realizar los \emph{clusterings} que detallaremos en secciones posteriores. Esta es una técnica visual que ayuda a optimizar el número de grupos a utilizar en \emph{K-means}. Su objetivo principal es ayudar a tomar una decisión informada sobre cuántos \emph{clusters} elegir.
+Teniendo en cuenta las limitaciones mencionadas anteriormente, se eligió el \textbf{método del codo} para determinar el número óptimo \emph{k} de grupos en los análisis de \emph{clustering} que se detallarán en secciones posteriores. Esta técnica heurística proporciona un enfoque visual para optimizar el número de grupos en el algoritmo \emph{K-means}, permitiendo tomar una decisión fundamentada en criterios cuantitativos.
 
-El método funciona de la siguiente manera:
+El método se implementa siguiendo estos pasos:
 \begin{enumerate}
-    \item Se ejecuta el algoritmo de \emph{clustering} varias veces con diferentes números de \emph{clusters}.
-    \item Para cada \emph{k}, se calcula la suma de los errores cuadráticos dentro del \emph{cluster} (\emph{WCSS}, por sus siglas en inglés).
-    \item Se grafica el \emph{WCSS} en función del número de \emph{clusters}.
-    \item Se busca un ``codo'' en el gráfico, que es un punto donde la disminución del \emph{WCSS} comienza a nivelarse.
+\item Se ejecuta el algoritmo \emph{K-means} iterativamente para diferentes valores de \emph{k}.
+\item Para cada iteración, se calcula la suma de los errores cuadráticos intra-cluster (\emph{Within-Cluster Sum of Squares, WCSS}).
+\item Se representa gráficamente la relación entre el \emph{WCSS} y el número de \emph{clusters}.
+\item Se identifica el punto de inflexión o ``codo'' en el gráfico, donde la tasa de disminución del \emph{WCSS} cambia significativamente.
 \end{enumerate}
 
-El ``codo'' en el gráfico representa el punto donde agregar más clústeres no mejora significativamente la calidad del agrupamiento. Este punto se considera el número óptimo de clústeres. Para ello, se calcula el error cuadrático total (SSE, por sus siglas en inglés) para diferentes cantidades de \emph{clusters}. El SSE mide la suma de las distancias cuadradas de cada punto al centroide más cercano, y se grafica frente al número de \emph{clusters}. En el gráfico, inicialmente el SSE disminuye rápidamente con el aumento de \emph{clusters}, pero en cierto punto la disminución se ralentiza, formando un ``codo'' en la curva. Este punto de inflexión indica el número óptimo de \emph{clusters}.
+El ``codo'' en la gráfica representa el punto de equilibrio donde el beneficio marginal de añadir más \emph{clusters} comienza a ser menos significativo en términos de la varianza explicada. Específicamente, el \emph{WCSS} mide la cohesión interna de los \emph{clusters} mediante la suma de las distancias euclidianas al cuadrado entre cada punto y el centroide de su \emph{cluster} asignado. La curva resultante típicamente muestra una disminución pronunciada inicial del \emph{WCSS} que luego se estabiliza, formando un ``codo''. Este punto de inflexión señala el número óptimo de \emph{clusters} que equilibra la complejidad del modelo con su capacidad explicativa.
 
-El método es beneficioso porque optimiza la elección del número de clusters eliminando la necesidad de depender de suposiciones previas \cite{metodo-codo}.
+La principal ventaja de este método radica en su capacidad para proporcionar una solución objetiva al problema de la selección del número de \emph{clusters}, eliminando la necesidad de basarse en suposiciones \emph{a priori} sobre la estructura de los datos \cite{metodo-codo}.
 
 
 \subsubsection{Fuzzy-c-means} \textbf{ }
