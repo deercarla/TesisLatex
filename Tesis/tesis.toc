@@ -1,39 +1,40 @@
 \babel@toc {spanish}{}\relax 
 \contentsline {chapter}{\numberline {1.}Introducción}{1}{chapter.1}%
 \contentsline {section}{\numberline {1.1}Motivación}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}CodeBert}{2}{section.1.2}%
-\contentsline {section}{\numberline {1.3}CodeBert y el ámbito estudiantil}{3}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Propuesta}{3}{section.1.4}%
+\contentsline {section}{\numberline {1.2}Modelos de lenguaje y el ambito estudiantil}{2}{section.1.2}%
+\contentsline {section}{\numberline {1.3}CodeBert}{2}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Propuesta de la tesis}{3}{section.1.4}%
 \contentsline {chapter}{\numberline {2.}Materiales y métodos}{4}{chapter.2}%
 \contentsline {section}{\numberline {2.1}Fuentes de datos}{4}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Proceso ETL de los datos}{4}{subsection.2.1.1}%
-\contentsline {subsubsection}{\numberline {2.1.1.1}Extracción}{4}{subsubsection.2.1.1.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.1}Extracción}{5}{subsubsection.2.1.1.1}%
 \contentsline {subsubsection}{\numberline {2.1.1.2}Transformación}{5}{subsubsection.2.1.1.2}%
-\contentsline {subsubsection}{\numberline {2.1.1.3}Carga}{7}{subsubsection.2.1.1.3}%
-\contentsline {section}{\numberline {2.2}Etapas de trabajo para el Análisis de los Datos}{9}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Reducción de la dimensionalidad}{9}{subsection.2.2.1}%
+\contentsline {subsubsection}{\numberline {2.1.1.3}Carga}{8}{subsubsection.2.1.1.3}%
+\contentsline {section}{\numberline {2.2}Etapas de trabajo para el Análisis de los Datos}{10}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Reducción de la dimensionalidad}{10}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Extracción de información adicional}{11}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Kmeans}{12}{subsection.2.2.3}%
-\contentsline {subsubsection}{\numberline {2.2.3.1}Elección del número de clusters}{12}{subsubsection.2.2.3.1}%
-\contentsline {subsubsection}{\numberline {2.2.3.2}Fuzzy-c-means}{13}{subsubsection.2.2.3.2}%
-\contentsline {subsubsection}{\numberline {2.2.3.3}Evaluación}{14}{subsubsection.2.2.3.3}%
+\contentsline {subsection}{\numberline {2.2.3}Agrupamiento}{12}{subsection.2.2.3}%
+\contentsline {subsubsection}{\numberline {2.2.3.1}Kmeans}{12}{subsubsection.2.2.3.1}%
+\contentsline {subsubsection}{\numberline {2.2.3.2}Elección del número de \emph {clusters}}{13}{subsubsection.2.2.3.2}%
+\contentsline {subsubsection}{\numberline {2.2.3.3}Fuzzy-c-means}{14}{subsubsection.2.2.3.3}%
+\contentsline {subsubsection}{\numberline {2.2.3.4}Evaluación}{14}{subsubsection.2.2.3.4}%
 \contentsline {subsection}{\numberline {2.2.4}Consideraciones sobre múltiples entregas}{16}{subsection.2.2.4}%
 \contentsline {chapter}{\numberline {3.}Resultados y discusión}{17}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Ejercicio a ejercicio}{17}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Cluster a cluster}{19}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}ARI y NMI}{20}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}Índice de Jaccard}{20}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.1}Análisis individual de los ejercicios}{17}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Evaluación del agrupamiento de manera global}{19}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Métricas: ARI y NMI}{20}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}Métricas: Índice de Jaccard}{20}{subsection.3.2.2}%
 \contentsline {section}{\numberline {3.3}Comparación por clusters en común}{21}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Clique máximo}{22}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Separación por grupos}{24}{subsection.3.3.2}%
-\contentsline {section}{\numberline {3.4}Nuevos enfoques para mejorar los resultados}{24}{section.3.4}%
-\contentsline {subsection}{\numberline {3.4.1}Eliminación del código repetido}{25}{subsection.3.4.1}%
-\contentsline {subsection}{\numberline {3.4.2}Inserción de datos de interés}{26}{subsection.3.4.2}%
-\contentsline {subsection}{\numberline {3.4.3}Usando \emph {embeddings} normalizados}{26}{subsection.3.4.3}%
-\contentsline {subsection}{\numberline {3.4.4}Fuzzy-2-means}{27}{subsection.3.4.4}%
-\contentsline {section}{\numberline {3.5}Representando a los alumnos como un único vector}{28}{section.3.5}%
-\contentsline {subsection}{\numberline {3.5.1}Vectores de ceros}{28}{subsection.3.5.1}%
-\contentsline {subsection}{\numberline {3.5.2}Función vacía}{29}{subsection.3.5.2}%
-\contentsline {subsection}{\numberline {3.5.3}Comparación respecto a la proporción de entregas}{31}{subsection.3.5.3}%
-\contentsline {chapter}{\numberline {4.}Conclusión}{32}{chapter.4}%
-\contentsline {chapter}{\numberline {5.}Trabajo futuro}{34}{chapter.5}%
+\contentsline {subsection}{\numberline {3.3.2}Separación por grupos}{25}{subsection.3.3.2}%
+\contentsline {section}{\numberline {3.4}Nuevos enfoques para mejorar los resultados}{26}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Eliminación del código repetido}{26}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Inserción de datos de interés}{28}{subsection.3.4.2}%
+\contentsline {subsection}{\numberline {3.4.3}Usando \emph {embeddings} normalizados}{29}{subsection.3.4.3}%
+\contentsline {subsection}{\numberline {3.4.4}Fuzzy-2-means}{29}{subsection.3.4.4}%
+\contentsline {section}{\numberline {3.5}Representando a los alumnos como un único vector}{30}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Vectores de ceros}{30}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Función vacía}{32}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Análisis de la proporción de entregas}{33}{subsection.3.5.3}%
+\contentsline {chapter}{\numberline {4.}Conclusión}{35}{chapter.4}%
+\contentsline {chapter}{\numberline {5.}Trabajo futuro}{37}{chapter.5}%
