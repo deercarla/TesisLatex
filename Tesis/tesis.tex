@@ -344,7 +344,7 @@ Sin embargo, \emph{Fuzzy-c-means} , al igual que \emph{K-means},  también requi
 
 Chan et al. en ``Clustering of clusters'' introducen una variante llamada \emph{Recursive Fuzzy-2-Mean} (RF2M), que extiende el \emph{Fuzzy-c-means} para agrupar \emph{clusters} existentes. Esta variante introduce una tercera clase para los puntos que no encajan bien en ninguno de los dos \emph{clusters} principales, añadiendo así más flexibilidad al método original \cite{fuzzy-k-means}.
 
-
+\newpage
 \subsubsection{Evaluación} \textbf{ }
 
 \textbf{Adjusted Rand Index}
@@ -355,7 +355,8 @@ El \textit{Adjusted Rand Index} (ARI) es una métrica utilizada para determinar 
 \text{ARI} = \frac{\text{RI} - \text{esperadoRI}}{\max \text{RI} - \text{esperadoRI}}
 \end{equation}
 
-donde \textit{RI} representa el índice de Rand, que calcula la similitud entre dos resultados de \emph{clustering} al considerar todos los puntos identificados dentro del mismo clúster. El valor del ARI es igual a 0 cuando los puntos se asignan aleatoriamente a los clústeres y es igual a 1 cuando los dos resultados de \emph{clustering} son idénticos. Esta métrica es útil para evaluar si los resultados de agrupamientos reducidos dimensionalmente son similares entre sí \cite{ari}.
+donde \textit{RI} representa el índice de Rand, el cual mide la similitud entre dos resultados de \emph{clustering} considerando todos los pares de puntos que son asignados al mismo o a diferentes clústeres en ambas asignaciones. El ARI toma un valor de 0 cuando la similitud observada entre dos resultados de \emph{clustering} es la misma que se esperaría por azar, y un valor de 1 cuando los dos resultados de \emph{clustering} son idénticos. Esta métrica es útil para evaluar si los resultados de agrupamientos en espacios de menor dimensión presentan similitudes entre sí \cite{ari}.
+
 
 \textbf{Normalized Mutual Information}
 
@@ -630,7 +631,7 @@ En cuanto a los estudiantes que continuaron con las entregas pasada este examen 
     \label{cluster2}
 \end{figure}
 
-Siendo difícil distinguir por este medio, evidenciado en la la falta de agrupaciones observables en la figura anterior, surgió la necesidad de adoptar nuevas medidas para mejorar estos resultados.
+Siendo difícil distinguir por este medio, evidenciado en la la falta de agrupaciones observables en la figura anterior, surgió la necesidad de adoptar nuevas medidas para mejorar estos resultados. 
 
 \section{Nuevos enfoques para mejorar los resultados}
 
@@ -812,6 +813,8 @@ Al contrastar esta información con los resultados de agrupamiento (Figuras \ref
 
 Es notable que en las etapas iniciales del curso, las proporciones entre grupos se mantienen cercanas al 50\%, sugiriendo una clasificación poco efectiva. Este análisis nos lleva a concluir que el algoritmo de agrupamiento está capturando principalmente patrones de participación (entregas realizadas vs. no realizadas) en lugar de características distintivas entre estudiantes que completarán o no el curso. Esta observación sugiere que la mera presencia o ausencia de entregas podría ser un predictor más simple y efectivo que el análisis del contenido de las soluciones para este propósito específico.
 
+Aún no se logró entonces caracterizar de manera efectiva a los estudiantes que, después del primer parcial, continúan realizando entregas, en contraste con aquellos que completan todo el curso. Esta diferenciación es importante para comprender mejor sus patrones de compromiso y desempeño a lo largo de la cursada. Aunque esta identificación temprana no se alcanzó en la primera mitad del curso, podríamos explorar su utilidad como predictor en etapas posteriores. De esta forma, podríamos anticipar, antes del segundo parcial, quiénes se mantendrán activos y probablemente se presentarán, permitiendo implementar estrategias de apoyo y retención más específicas para los estudiantes en riesgo de no finalizar.
+
 \chapter{Conclusión}
 
 Este trabajo abordó el análisis del comportamiento estudiantil en un curso Introductorio a Python en contexto de pandemia, centrándose exclusivamente en el análisis de las producciones de código de los alumnos. El objetivo principal fue identificar patrones que permitieran detectar grupos con mayor propensión a la deserción.
@@ -836,7 +839,7 @@ Cerdeiro et al. destacan que durante la pandemia se implementaron diversos canal
 
 La estructura actual de nuestra base de datos facilitaría la incorporación de variables adicionales, como la cantidad de entregas por alumno. Un análisis más exhaustivo podría examinar la trayectoria individual de cada estudiante, contemplando tanto su progreso entre ejercicios como su evolución dentro de cada entrega.
 
-Para investigaciones futuras, además de predecir la finalización del curso, podríamos estimar la presentación a los exámenes parciales. Específicamente, sería valioso analizar si los estudiantes que comparten más de 13 \emph{clusters} llegaron a presentarse a la evaluación, más allá de haber dejado de entregar trabajos después de la primera evaluación. Esta información resultaría particularmente útil para la planificación docente y la gestión de los tiempos de corrección. También podríamos extender nuestro análisis a la segunda instancia de evaluación, enfocándonos especialmente en aquellos alumnos que, si bien no completaron el curso, tampoco lo abandonaron antes del primer parcial - un grupo que representa el 46\% de los estudiantes que no pudieron ser diferenciados en nuestro análisis inicial.
+Para investigaciones futuras, además de predecir la finalización del curso, podríamos estimar la presentación a los exámenes parciales. Específicamente, sería valioso analizar si los estudiantes que comparten más de 13 \emph{clusters} llegaron a presentarse a la evaluación, más allá de haber dejado de entregar trabajos después de la primera evaluación. Esta información resultaría particularmente útil para la planificación docente y la gestión de los tiempos de corrección. También podríamos extender nuestro análisis a la segunda instancia de evaluación, enfocándonos especialmente en aquellos alumnos que, si bien no completaron el curso, tampoco lo abandonaron antes del primer parcial - un grupo que representa el 46\% de los estudiantes que no pudieron ser diferenciados en nuestro análisis inicial. Para ello, podríamos ahondar un poco más en la Figura \ref{cluster2} en la cual si bien no se vieron grandes grupos, podríamos comenzar por intentar caracterizar a los estudiantes del pequeño cuadrado de abajo a la derecha. 
 %%%% BIBLIOGRAFIA
 \backmatter
 \bibliographystyle{unsrt}
