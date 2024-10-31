@@ -5,6 +5,7 @@
 \newblock Resolución nro. 263/15.
 \newblock \url{http://www.me.gov.ar/consejo/resoluciones/res15/263-15.pdf},
   2015.
+\newblock [Online]. Available: 2024-10-19.
 
 \bibitem{DOV}
 UBA DOV.
@@ -23,18 +24,6 @@ Nicolas Varaschin~187/08 Daniel~Paz.
   Ciencias de la Computación en FCEN-UBA}.
 \newblock PhD thesis, Universidad de Buenos Aires, 2020.
 
-\bibitem{codeBert}
-Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
-  Shou, Bing Qin, Ting Liu, Daxin Jiang, and Ming Zhou.
-\newblock Codebert: A pre-trained model for programming and natural languages,
-  2020.
-
-\bibitem{codeBert-repo}
-Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
-  Shou, Bing Qin, Ting Liu, Daxin Jiang, and Ming Zhou.
-\newblock Codebert - base.
-\newblock \url{https://huggingface.co/microsoft/codebert-base}, 2020.
-
 \bibitem{gulwani2018automated}
 Sumit Gulwani, Ivan Radi{\v{c}}ek, and Florian Zuleger.
 \newblock Automated clustering and program repair for introductory programming
@@ -45,6 +34,7 @@ Sumit Gulwani, Ivan Radi{\v{c}}ek, and Florian Zuleger.
 Sonja Johnson-Yu, Nicholas Bowman, Mehran Sahami, and Chris Piech.
 \newblock Simgrade: Using code similarity measures for more accurate human
   grading, 2024.
+\newblock [Online]. Available: 2024-10-19.
 
 \bibitem{brigante2020evaluation}
 Siegfried~Nijssen Simone~Brigante, Silvia~Chiusano.
@@ -56,6 +46,18 @@ Siegfried~Nijssen Simone~Brigante, Silvia~Chiusano.
 Mike Wu, Milan Mosse, Noah Goodman, and Chris Piech.
 \newblock Zero shot learning for code education: Rubric sampling with deep
   learning inference, 2018.
+
+\bibitem{codeBert}
+Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
+  Shou, Bing Qin, Ting Liu, Daxin Jiang, and Ming Zhou.
+\newblock Codebert: A pre-trained model for programming and natural languages,
+  2020.
+
+\bibitem{codeBert-repo}
+Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
+  Shou, Bing Qin, Ting Liu, Daxin Jiang, and Ming Zhou.
+\newblock Codebert - base.
+\newblock \url{https://huggingface.co/microsoft/codebert-base}, 2020.
 
 \bibitem{unsam2020}
 Manuela Cerdeiro, Jos{\'e}~Emilio Crespo, Oscar Filevich, Rafael Grimson, and
@@ -86,12 +88,12 @@ Keith~D. Cooper and Linda Torczon.
 \bibitem{ast}
 Python~Software Foundation.
 \newblock Abstract syntax trees — ast — python 3 documentation, 2024.
-\newblock Accessed: 2024-10-20.
+\newblock [Online]. Available: 2024-10-19.
 
 \bibitem{roberta_model}
 Hugging Face.
 \newblock Roberta model documentation, 2024.
-\newblock Accessed: 2024-10-20.
+\newblock [Online]. Available: 2024-10-19.
 
 \bibitem{sklearn_normalize}
 sklearn.preprocessing.normalize.
@@ -102,12 +104,12 @@ sklearn.preprocessing.normalize.
 \bibitem{MongoDB-docs}
 Mongodb documentation.
 \newblock \url{https://www.mongodb.com/docs/}.
-\newblock [Online].
+\newblock [Online]. Available: 2024-10-19.
 
 \bibitem{pymongo}
 Pymongo.
 \newblock \url{https://pymongo.readthedocs.io/en/stable/}.
-\newblock [Online].
+\newblock [Online]. Available: 2024-10-19.
 
 \bibitem{pca-musil}
 Tom{\'a}{\v{s}} Musil.
