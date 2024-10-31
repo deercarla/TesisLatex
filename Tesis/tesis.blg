@@ -5,50 +5,60 @@ Reallocating 'name_of_file' (item size: 1) to 6 items.
 The style file: unsrt.bst
 Reallocating 'name_of_file' (item size: 1) to 6 items.
 Database file #1: tesis.bib
+Repeated entry---line 23 of file tesis.bib
+ : @misc{resolucionProgramar
+ :                          ,
+I'm skipping whatever remains of this entry
 Warning--entry type for "primeros-datos" isn't style-file defined
---line 237 of file tesis.bib
+--line 271 of file tesis.bib
 Warning--entry type for "codeBert-repo" isn't style-file defined
---line 255 of file tesis.bib
+--line 289 of file tesis.bib
+Too many commas in name 1 of "Sanseau, M., Sánchez Cestona, J., Calio, S" for entry permanencia
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "Sanseau, M., Sánchez Cestona, J., Calio, S" for entry permanencia
+while executing---line 944 of file unsrt.bst
+Too many commas in name 1 of "Sanseau, M., Sánchez Cestona, J., Calio, S" for entry permanencia
+while executing---line 944 of file unsrt.bst
 Warning--empty booktitle in tokens
-You've used 31 entries,
+You've used 32 entries,
             1791 wiz_defined-function locations,
-            609 strings with 8628 characters,
-and the built_in function-call counts, 6762 in all, are:
-= -- 594
-> -- 307
+            614 strings with 8746 characters,
+and the built_in function-call counts, 6880 in all, are:
+= -- 602
+> -- 311
 < -- 8
-+ -- 116
-- -- 85
-* -- 330
-:= -- 1015
-add.period$ -- 98
-call.type$ -- 31
-change.case$ -- 29
++ -- 118
+- -- 86
+* -- 331
+:= -- 1032
+add.period$ -- 100
+call.type$ -- 32
+change.case$ -- 30
 chr.to.int$ -- 0
-cite$ -- 32
-duplicate$ -- 335
-empty$ -- 688
-format.name$ -- 85
-if$ -- 1602
+cite$ -- 33
+duplicate$ -- 340
+empty$ -- 706
+format.name$ -- 86
+if$ -- 1630
 int.to.chr$ -- 0
-int.to.str$ -- 31
+int.to.str$ -- 32
 missing$ -- 18
-newline$ -- 157
-num.names$ -- 32
-pop$ -- 151
+newline$ -- 161
+num.names$ -- 33
+pop$ -- 158
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 214
+skip$ -- 218
 stack$ -- 0
 substring$ -- 258
-swap$ -- 120
+swap$ -- 121
 text.length$ -- 8
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 50
-width$ -- 33
-write$ -- 333
-(There were 3 warnings)
+while$ -- 51
+width$ -- 34
+write$ -- 341
+(There were 4 error messages)
