@@ -160,7 +160,7 @@ En la figura  \ref{contenidos} se pueden observar  los contenidos de la materia 
 
 
 
-\subsubsection{Transformación}\textbf{ }
+\subsubsection{Transformación}\label{sec:normalizacion}  \textbf{ }
 
 A los códigos extraídos de los 31 ejercicios comprendidos por estas unidades para los más de 800 alumnos de los cuales los obtuvimos, se los anonimizó. Para ello asociamos cada entrega con un identificador creado por nosotros, \emph{id\_anon}.
 
@@ -678,7 +678,7 @@ A continuación, se realizó un \emph{mapeo} entre alumnos con código idéntico
 
 Como se observa en la Figura \ref{heatmaps_repetidos}, a modo de ejemplo, no se observó una diferencia significativa entre el \emph{clustering} original y aquél realizado contemplando lo mencionado anteriormente para ninguno de los 31 ejercicios.
 
-Como última medida, se observó la proporción \emph{cluster} a \emph{cluster} de alumnos que habían finalizado el curso, esperando ver una diferencia significativa, como muestra la Figura \label{porcentajes}.
+Como última medida, se observó la proporción \emph{cluster} a \emph{cluster} de alumnos que habían finalizado el curso, esperando ver una diferencia significativa, como muestra la Figura \ref{porcentajes}.
 
 \begin{figure}[H]
     \centering
@@ -695,17 +695,20 @@ Como última medida, se observó la proporción \emph{cluster} a \emph{cluster} 
     \label{porcentajes}
 \end{figure}
 
-Hubiera sido deseable observar que las diferencias entre dichas proporciones para cada ejercicio estuvieran más marcadas. Por el contrario, parecería haber una mejor separación de los dos grupos utilizando los datos originales.
-
-Luego, no parecería haber un indicador de que el código idéntico incida sobre la \emph{clusterización} de los alumnos.
-
+Al analizar la Figura \ref{porcentajes}, se observaron dos aspectos relevantes:
+\begin{enumerate}
+     \item En los datos sin código repetido, la proporción de alumnos que finalizaron el curso mostró una distribución más homogénea entre los diferentes \emph{clusters}. Si bien inicialmente se esperaba encontrar diferencias más marcadas entre estas proporciones para cada ejercicio, lo cual habría indicado un agrupamiento más efectivo de los estudiantes, los resultados no reflejaron esta tendencia.
+     \item Por el contrario, los datos originales (con código repetido) mostraron una mejor diferenciación entre los dos grupos de estudiantes.
+\end{enumerate}
+Por lo tanto, los resultados sugieren que la presencia de código idéntico no tiene un impacto significativo en la \emph{clusterización} de los alumnos.
 
 \subsection{Inserción de datos de interés}
 Para esta sección se le intentó hacer foco a ciertas características del código producido por los estudiantes, cuya extracción se comentó en la Sección~\ref{subsec:extraccion}. Se hizo un particular hincapié en el número de líneas, agregándolo como una nueva componente tanto en el vector de \emph{embeddings} como luego de su reducción de la dimensionalidad. En ninguno de los dos casos se observaron cambios significativos en el agrupamiento. Una posible explicación es que el modelo ya contempla estas características inherentes al código en cuestión, por lo que no parecería estar incorporándose información adicional. 
 
 
 \subsection{Usando \emph{embeddings} normalizados}
-Se realizó nuevamente un análisis análogo al de la Figura \ref{cluster}, obteniéndose resultados análogos, como muestra la Figura \ref{normalizados}.
+
+Se analizó a continuación el efecto de la normalización de los \emph{embeddings} descrita en la Sección \ref{sec:normalizacion} en el agrupamiento. Para ello se realizó nuevamente un análisis análogo al de la Figura \ref{cluster}, obteniéndose resultados análogos, como muestra la Figura \ref{normalizados}.
 
 \begin{figure}[H]
     \centering
@@ -714,7 +717,7 @@ Se realizó nuevamente un análisis análogo al de la Figura \ref{cluster}, obte
     \label{normalizados}
 \end{figure}
 
-Esto no agregó información adicional por sobre lo realizado anteriormente. Tras haber replicado el procedimiento de los \emph{cliques}, estos retornaron resultados muy similares a los anteriores, teniendo como diferencia apenas un par de estudiantes por grupo. 
+Esto no agregó información adicional por sobre lo realizado anteriormente. Tras haber replicado el procedimiento de los \emph{cliques}, estos retornaron resultados muy similares a los anteriores, teniendo como diferencia de apenas dos estudiantes por grupo. 
 
 
 
@@ -739,7 +742,7 @@ Una característica útil de \emph{Fuzzy-2-means} es que este permite que alguno
     \label{fuzzy}
 \end{figure}
 
-No se observaron alumnos a los cuales asignara parcialmente a un grupo, perteneciendo todos en su totalidad a alguno de los \emph{clusters} mostrados en la figura anterior. Si se observó un incremento en la cantidad de \emph{clusters} que, si bien son más homogéneos, se debe a que estos son muy pequeños, contando con una cantidad de apenas algunos estudiantes. Luego, este algoritmo no proporcionó información adicional por sobre el \emph{Kmeans} tradicional, para este caso particular.
+No se observaron alumnos a los cuales asignara parcialmente a un grupo, perteneciendo todos en su totalidad a alguno de los \emph{clusters} mostrados en la figura anterior. Sí se observó un incremento en la cantidad de \emph{clusters} que, si bien son más homogéneos, se debe a que estos son muy pequeños, contando con una cantidad de apenas algunos estudiantes. Luego, este algoritmo no proporcionó información adicional por sobre el \emph{Kmeans} tradicional, para este caso particular.
 
 \section{Representando a los alumnos como un único vector}
 
@@ -755,6 +758,8 @@ En una primera aproximación, se construyó el vector de cada estudiante de la s
     \item \textbf{Para entregas realizadas}: se utilizó el \emph{embedding} generado por \emph{CodeBERT} correspondiente a dicha entrega.
     \item\textbf{Para entregas ausentes}: se insertó un vector de 768 ceros (coincidiendo con la dimensión del \emph{output} de \emph{CodeBERT}).
 \end{itemize}
+
+Luego, como muestra la Figura \ref{fig: zeros}, se analizó cómo variaba el agrupamiento con la inserción de cada nueva producción de código de los estudiantes.
 
 \begin{figure}[H]
     \centering
@@ -774,12 +779,14 @@ Considerando que un vector de ceros podría no tener un significado semántico c
     \item \textbf{Para entregas ausentes}: se generó el \emph{embedding} de una función vacía contextualizada al ejercicio correspondiente.
 \end{itemize}
 
-Por ejemplo, para el ejercicio \emph{buscar\_u\_elemento}, la función vacía se definió como el descrito en la Figura \ref{vacia}. 
+Por ejemplo, para el ejercicio \emph{buscar\_u\_elemento}, la función vacía se definió como el descrito en el Listing \ref{vacia}. 
 
-\begin{lstlisting}[style=pythonstyle,  label={vacia}]
+\begin{lstlisting}[style=pythonstyle, label={vacia}, caption={Ejemplo de función vacía para un ejercicio del curso.}]
 def buscar_u_elemento():
     pass
 \end{lstlisting}
+
+Luego, análogo a la Figura \ref{fig: zeros}, como muestra la Figura \ref{fig: fill func}, se analizó cómo variaba el agrupamiento con la inserción de cada nueva producción de código de los estudiantes.
 
 \begin{figure}[H]
     \centering
@@ -797,7 +804,7 @@ Para comprender mejor la naturaleza de los agrupamientos observados, se realizó
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{imagenes/proporcion - entregas (1).png}
-    \caption{Distribución temporal de las entregas realizadas por ejercicio, expresada como proporción del total de estudiantes.}
+    \caption{Distribución temporal de las entregas realizadas por ejercicio, expresada como proporción del total de estudiantes en orden cronológico.}
      \label{entregas}
 \end{figure}
 
