@@ -118,7 +118,7 @@ En su investigación usando \emph{code2vec},  Brigante  evaluó si el código fu
 
 Se trata de un modelo preentrenado diseñado para entender y generar tanto lenguaje natural (NL) como lenguajes de programación (PL). Se basa en una arquitectura \emph{Transformer}, similar a \emph{BERT} y \emph{RoBERTa}, y fue entrenado usando datos bimodales (pares NL-PL) y unimodales (código o texto sin parejas), en seis lenguajes de programación (Python, Java, JavaScript, PHP, Ruby y Go) usando datos de repositorios públicos en GitHub. Esto último es particularmente relevante siendo que los cursos mencionados en la (FCEN-UBA), son dictados en el lenguaje Python.
 
-\emph{CodeBERT} genera  \emph{embeddings} o representaciones vectoriales de fragmentos de código mediante su arquitectura basada en \emph{Transformers}. Al alimentar un fragmento de código como entrada,se convierte el código en una secuencia de \emph{tokens}, que se luego procesa a través de capas de redes neuronales para producir una representación contextualizada para cada \emph{token}. Estas representaciones logran capurar tanto la sintaxis como la semántica del programa.
+\emph{CodeBERT} genera  \emph{embeddings} o representaciones vectoriales de fragmentos de código mediante su arquitectura basada en \emph{Transformers}. Al alimentar un fragmento de código como entrada,se convierte el código en una secuencia de \emph{tokens}, que luego se procesa a través de capas de redes neuronales para producir una representación contextualizada para cada \emph{token}. Estas representaciones logran capurar tanto la sintaxis como la semántica del programa.
 
 El \emph{embedding} final para un fragmento completo puede obtenerse utilizando el vector asociado al \emph{token} especial [CLS], que representa el significado agregado de la secuencia. Estos \emph{embeddings} pueden emplearse para tareas como búsqueda de código, clasificación, o generación de documentación, ya que contienen información relevante tanto del contenido del código como de su contexto.
 
@@ -127,7 +127,7 @@ El \emph{embedding} final para un fragmento completo puede obtenerse utilizando 
 
 \section{Propuesta de la tesis}
 
-Utilizando el modelo \emph{CodeBERT}, proponemos caracterizar las trayectorias académica de los estudiantes de un curso introductorio de programación, basándonos exclusivamente en sus producciones de código. Esto puede ser particularmente útil para los docentes, ya que podría permitir identificar a los grupos más vulnerables en la cursada y saber en cuáles concentrar los esfuerzos.
+Utilizando el modelo \emph{CodeBERT}, proponemos caracterizar las trayectorias académicas de los estudiantes de un curso introductorio de programación, basándonos exclusivamente en sus producciones de código. Esto puede ser particularmente útil para los docentes, ya que podría permitir identificar a los grupos más vulnerables en la cursada y saber en cuáles concentrar los esfuerzos.
 
 %% ...
 \chapter{Materiales y métodos}
@@ -176,7 +176,7 @@ Se obtuvieron entonces en una primera instancia tres conjuntos de datos:
     \item \textbf{Resultados} de la cursada, con el identificador del estudiante, la nota de las entregas, los dos parciales y el trabajo práctico y un valor \emph{booleano} haciendo referencia a si este aprobó o no la cursada. Dentro de este conjunto se encuentran únicamente aquellos alumnos que finalizaron la materia.  
 \end{itemize} 
 
-Webster et al. definen \emph{token} como una unidad básica en el procesamiento del lenguaje natural (NLP) que no necesita ser descompuesta en etapas posteriores del procesamiento. Puede ser un elemento como una palabra, un modismo o una expresión fija, que se trata como un átomo indivisible para los propósitos de la computación. La tokenización implica identificar estas unidades básicas en el texto, que son esenciales para realizar análisis o generación de texto posteriores~\cite{tokens}.
+Webster et al. definen \emph{token} como una unidad básica en el procesamiento del lenguaje natural (NLP) que no necesita ser descompuesta en etapas posteriores del procesamiento. Puede ser un elemento como una palabra, un modismo o una expresión fija, que se trata como un átomo indivisible para los propósitos de la computación. La tokenización implica identificar estas unidades básicas en el texto, que son esenciales para realizar análisis o generación de textos posteriores~\cite{tokens}.
 
 El modelo de interés, \emph{CodeBERT}, tiene un límite de 512 \emph{tokens} para la entrada. Esto significa que cualquier secuencia de código a procesar tiene que ser truncada o dividida para que no exceda esta cantidad. Es debido a esta limitación del modelo que se tomó la decisión de realizar una limpieza del código, eliminando así los comentarios del mismo. Además, por cada ejercicio a entregar se contaba con una función \emph{objetivo}, que fue la que se consideró para la extracción. Cabe destacar que de realizarse testeos automatizados, aquellos archivos que no contaran con dichas funciones \emph{objetivo} (o estuvieran mal nomencladas), habrían fallado. Esto se consideró como un criterio adicional para discriminar entre qué datos incorporaríamos al análisis subsiguiente y cuáles no. 
 
@@ -229,6 +229,10 @@ Luego, para cada archivo \emph{.py}, una vez limpiado como se mencionó en secci
 \end{algorithm}
 
 Además, se almacenaron los \emph{embeddings} normalizados. La normalización de \emph{embeddings} ajusta los vectores para que tengan una magnitud uniforme, comúnmente de longitud 1. Esto facilita comparaciones y cálculos posteriores al eliminar diferencias en escalas. Para ello usamos la biblioteca \emph{normalize} de \emph{scikit-learn} \cite{sklearn_normalize}.
+
+La ausencia de normalización en los \emph{embeddings} puede generar diversos problemas en el procesamiento de lenguaje natural. El más significativo es el denominado ``efecto de magnitud'', donde vectores con magnitudes mayores pueden dominar inadecuadamente en cálculos de similitud coseno, independientemente de su verdadera similitud semántica \cite{mu2018all}. Por ejemplo, en búsqueda semántica, un documento largo podría aparecer como más relevante simplemente porque sus vectores tienen mayor magnitud, no porque sea realmente más similar a la consulta.
+
+Un caso documentado de este fenómeno ocurre en sistemas de recomendación basados en \emph{embeddings}. Li et al. \cite{li2020improving} demostraron que sin normalización, las recomendaciones tendían a favorecer elementos con \emph{embeddings} de mayor magnitud, lo que resultaba en sesgos sistemáticos hacia ciertos tipos de contenido, independientemente de su relevancia real para el usuario. En sus experimentos, la normalización mejoró la precisión de las recomendaciones en un 15\% al eliminar estos sesgos indeseados.
 
 \subsubsection{Carga} \textbf{ }
 

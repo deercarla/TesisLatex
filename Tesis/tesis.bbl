@@ -60,7 +60,7 @@ Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
 \newblock \url{https://huggingface.co/microsoft/codebert-base}, 2020.
 
 \bibitem{permanencia}
-Sánchez Cestona J. Calio~S Sanseau, M.
+Calio~S Sanseau~M., Sánchez Cestona~J.
 \newblock Permanencia de las y los estudiantes en la universidad, 2023.
 
 \bibitem{unsam2020}
@@ -104,6 +104,19 @@ sklearn.preprocessing.normalize.
 \newblock
   \url{https://scikit-learn.org/1.5/modules/generated/sklearn.preprocessing.normalize.html}.
 \newblock [Online]. Available: 2024-10-19.
+
+\bibitem{mu2018all}
+Jiaqi Mu, Suma Bhat, and Pramod Viswanath.
+\newblock All-but-the-top: Simple and effective postprocessing for word
+  representations.
+\newblock {\em CoRR}, abs/1702.01417, 2017.
+
+\bibitem{li2020improving}
+Suming~Jeremiah Chen, Zhen Qin, Zachary~Teal Wilson, Brian~Lee Calaci,
+  Michael~Richard Rose, Ryan~Lee Evans, Sean~Robert Abraham, Don Metzler,
+  Sandeep Tata, and Mike Colagrosso.
+\newblock Improving recommendation quality at google drive.
+\newblock 2020.
 
 \bibitem{MongoDB-docs}
 Mongodb documentation.
