@@ -1,6 +1,7 @@
 \documentclass[11pt,a4paper,twoside,openany]{tesis}
 \usepackage{titlesec}
 \usepackage{amsmath}
+\usepackage{placeins}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage[spanish]{babel}
@@ -276,7 +277,7 @@ PCA ofrece ventajas claras para \emph{embeddings}. Permite reducir los vectores 
 
 Otra desventaja es el costo computacional de calcular la matriz de covarianza, especialmente para grandes volúmenes de datos. Esto puede ser un obstáculo en proyectos extensos de, por ejemplo, procesamiento del lenguaje natural\cite{pca-basirat}. Sin embargo, esta sigue siendo una herramienta valiosa para la reducción de dimensionalidad y la optimización en el manejo de \emph{embeddings}, motivo por el cual se usó para los análisis posteriores.
 
-Teniendo en cuenta las ventajas y limitaciones mencionadas anteriormente, se usó la técnica de  PCA para reducir la dimensionalidad de los \emph{embeddings}, los cuales en su estado original poseen 768 dimensiones
+Teniendo en cuenta las ventajas y limitaciones mencionadas anteriormente, se usó la técnica de PCA para reducir la dimensionalidad de los \emph{embeddings}, los cuales en su estado original poseen 768 dimensiones. Se realizaron pruebas comparativas de agrupamiento utilizando los vectores originales de 768 dimensiones, sin embargo, estos no mostraron mejoras significativas en los resultados respecto a los obtenidos con la reducción dimensional, por lo que se optó por mantener el uso de PCA para los análisis posteriores.
 
 \begin{figure}[H]
     \centering
@@ -309,11 +310,11 @@ Para ello, se tomó una producción de código de un alumno al azar del ejercici
 
 Como era de esperarse, como muestra la Figura \ref{variaciones-codigo}, se observó que variantes muy similares del código (como, por ejemplo las propuestas por los ítems 1) y 3)) no se distanciaban mucho las unas de las otras. En la figura se puede observar también una clara tendencia en cuanto a la longitud del código y su representación en el plano. Además, diferencias cómo el uso de $for$ (los tres puntos comprendidos entre las dos cajas rojas) y el $while$ (aquellos comprendidos entre las cajas violetas) o la ausencia de ambos, tuvieron también un impacto significativo en los \emph{embeddings} y su representación en el plano de dos dimensiones.
 
-A partir de lo anterior, siendo que utilizar $fos$ \emph{vs} $while$ puede cambiar la posición que ocupa el punto en el gráfico \ref{variaciones-codigo}, entonces se decidió incorporar el uso o no de estas primitivas a la tabla (ver Figura \ref{diagrama-base}, tabla CodeAndEmbeddings). No sólo hemos incorporado el dato de si se ha utilizado $for$/$while$ sino que también hemos incorporado el dato de la cantidad de if que se ha utilizado, la cantidad de líneas que posee el códig ofuente, entre otros datos.
+A partir de lo anterior, siendo que utilizar $for$ \emph{vs} $while$ puede cambiar la posición que ocupa el punto en el gráfico \ref{variaciones-codigo}, entonces se decidió incorporar el uso o no de estas primitivas a la tabla (ver Figura \ref{diagrama-base}, tabla CodeAndEmbeddings). No sólo hemos incorporado el dato de si se ha utilizado $for$/$while$ sino que también hemos incorporado el dato de la cantidad de if que se ha utilizado, la cantidad de líneas que posee el código fuente, entre otros datos.
 
 \subsection{Agrupamiento}
 
-La próxima sección abordará las técnicas de \emph{clustering} implementadas para agrupar estudiantes, basándose en los \emph{embeddings} y la reducción de dimensionalidad mediante la técnica de PCA mediante PCA.
+La próxima sección abordará las técnicas de \emph{clustering} implementadas para agrupar estudiantes, basándose en los \emph{embeddings} y la reducción de dimensionalidad mediante la técnica de PCA.
 
 \subsubsection{Kmeans}\textbf{ } 
 
@@ -491,19 +492,19 @@ En un intento adicional por obtener información a partir de los ejercicios obse
 
 \section{Evaluación del agrupamiento de manera global}
 Para esta sección, se analizaron varias métricas para evaluar el \emph{clustering} realizado. La evaluación rigurosa de los resultados del agrupamiento es fundamental por múltiples razones: permite validar la calidad de las agrupaciones obtenidas, asegura que los patrones descubiertos son significativos y no aleatorios, y facilita la comparación objetiva entre diferentes configuraciones del algoritmo. Además, dado que el \emph{clustering} es una técnica de aprendizaje no supervisado, estas métricas proporcionan una forma cuantitativa de verificar si los grupos identificados representan verdaderamente estructuras naturales en los datos.
-
+\newpage
 \subsection{Métricas: ARI y NMI}
 Como se mencionó anteriormente, para cada ejercicio se realizó una \emph{clusterización} usando el método del codo. En el análisis de las agrupaciones generadas, se evaluó el grado de correspondencia entre las particiones obtenidas para cada ejercicio con las de los demás ejercicios. Para esto, se utilizaron dos métricas principales: el \emph{Indice de Información Mutua Normalizado} (NMI) \cite{nmi} y el \emph{Indice Rand Ajustado} (ARI) \cite{ari}. Los resultados de estas comparaciones pueden observarse en la Figura \ref{ari_nmi}, donde los valores de NMI y ARI para cada ejercicio se representan en relación con los demás.
 
-\begin{figure}[H]
+\begin{figure}
     \centering
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.7\textwidth}
         \includegraphics[width=\linewidth]{imagenes/ari.png}
         \caption{ARI}
         \label{fig:figura1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.45\textwidth}
+    \begin{subfigure}{0.7\textwidth}
         \includegraphics[width=\linewidth]{imagenes/nmi.png}
         \caption{NMI}
         \label{fig:figura2}
@@ -520,9 +521,9 @@ Por otro lado, los bajos valores de ARI implican que la similitud entre las asig
 \subsection{Métricas: Índice de Jaccard}
 Para esta evaluación se analizaron las particiones de manera individual. Esto es, obviando a qué ejercicio pertenecían, se calculó el Índice de Similitud de Jaccard \cite{jaccard} para cada uno de los más de cien \emph{clusters} generados a lo largo de los 31 entregables.
 
-\begin{figure}
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{imagenes/clusterxcluster.png}
+    \includegraphics[width=1\textwidth]{imagenes/clusterxcluster.png}
     \caption{Índice de similitud de Jaccard entre todos los \emph{clusters} generados ejercicio a ejercicio.}
      \label{jaccard}
 \end{figure}
@@ -582,7 +583,7 @@ El código garantiza que todos los estudiantes en el \emph{clique} resultante co
 
 Segundo, el algoritmo busca el \emph{clique} más grande en este grafo. Por definición, un \emph{clique} es un subgrafo completamente conectado, lo que significa que todos los nodos en el \emph{clique} están conectados directamente entre sí. Como en este grafo cada conexión representa compartir al menos \emph{n} \emph{clusters}, todos los estudiantes en el \emph{clique} resultante necesariamente comparten al menos \emph{n} \emph{clusters} con todos los demás miembros del \emph{clique}. Así, la combinación de la construcción selectiva del grafo y la búsqueda de \emph{cliques} asegura la propiedad deseada.
 
-En cuanto a la ejecución del algoritmo anterior, basados en los datos con los que se generó la Figura \ref{cluster} se comenzó a iterar buscando el \emph{clique} más grande para cada \emph{n} comenzando desde el muy optimista número de más de veintitrés \emph{clusters} en común, descendientemente. Cabe destacar que estas corridas se hicieron por separado debido a los extensos tiempos de ejecución que estas llevaron y se eligió este número por representar ``más de la mitad del curso''. Más específico aún, se trata del número de la última entrega de la última unidad anterior al primer parcial (el ejercicio \emph{medidas\_especies}), momento para el cual sería deseable tener una noción de quiénes continuarán con el curso.   
+En cuanto a la ejecución del algoritmo anterior, basados en los datos con los que se generó la Figura \ref{cluster} se comenzó a iterar buscando el \emph{clique} más grande para cada \emph{n} comenzando desde el muy optimista número de más de veintitrés \emph{clusters} en común, descendientemente. Cabe destacar que estas corridas se hicieron por separado debido a los extensos tiempos de ejecución que estas llevaron (de más de 14 horas las corridas preliminares con un Intel(R) Core(TM) i7-14700K   3.40 GHz y 64.0 GB de RAM) y se eligió este número por representar ``más de la mitad del curso''. Más específico aún, se trata del número de la última entrega de la última unidad anterior al primer parcial (el ejercicio \emph{medidas\_especies}), momento para el cual sería deseable tener una noción de quiénes continuarán con el curso.   
 
 Como es de esperarse, a medida que se decrementa dicho \emph{n}, la cantidad de alumnos en el \emph{clique} aumenta ya que se vuelve más laxa la condición para formar parte de él. Notamos sin embargo que, a medida que se reducía el \emph{n}, la proporción de alumnos que \emph{no habían terminado el curso} dentro del \emph{clique}, incrementaba.  Esta tendencia se observó hasta alcanzar los 13 \emph{clusters} en común, número a partir del cual la proporción comenzaba a disminuir nuevamente.
 
@@ -598,35 +599,30 @@ A partir de esto, se intentó clasificar a los estudiantes en tres grupos:
     \item Aquellos que continuaron con el programa hasta su finalización
 \end{enumerate}
 
-\newpage
+
 \subsection{Separación por grupos}\textbf{ }
 
-Con el objetivo de caracterizar cada subgrupo, se analizaron los patrones de entrega de ejercicios de los tres grupos identificados. Los resultados de este análisis se visualizaron en el \emph{heatmap} de la Figura \ref{entregas}, donde se representa la distribución temporal de las entregas realizadas por cada grupo a lo largo del curso.
+Con el objetivo de caracterizar cada subgrupo, se analizaron los patrones de entrega de ejercicios de los tres grupos identificados. Los resultados de este análisis se visualizaron en los \emph{heatmaps} de las Figuras \ref{fig:final}, \ref{fig:clique} y \ref{fig:noclique}, donde se representa la distribución temporal de las entregas realizadas por cada grupo a lo largo del curso.
 
 \begin{figure}[H]
-    \centering
-    \begin{subfigure}[t]{0.3\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/entregas - finalizados.png}
-        \caption{Alumnos que finalizaron el curso.}
-        \label{fig:final}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.3\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/entregas - clique13.png}
-        \caption{Alumnos con más de 13 \emph{clusters} en común.}
-        \label{fig:clique}
-    \end{subfigure}
-    \hfill
-    \begin{subfigure}[t]{0.3\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{imagenes/entregas - no-clique13.png}
-        \caption{Alumnos que no finalizaron el curso,\\que no pertenecen al grupo anterior.}
-        \label{fig:noclique}
-    \end{subfigure}
-    \caption{Entregas por alumno según el ejercicio, ordenados cronológicamente.}
-    \label{entregas}
+\centering
+\includegraphics[width=0.5\textwidth]{imagenes/entregas - finalizados.png}
+\caption{Alumnos que finalizaron el curso.}
+\label{fig:final}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{imagenes/entregas - clique13.png}
+\caption{Alumnos con más de 13 \emph{clusters} en común.}
+\label{fig:clique}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.5\textwidth]{imagenes/entregas - no-clique13.png}
+\caption{Alumnos que no finalizaron el curso, que no pertenecen al grupo anterior.}
+\label{fig:noclique}
 \end{figure}
 
 Se puede observar entonces en la Figura  \ref{fig:clique} que los alumnos que componen este grupo de interés no solamente realizaron entregas similares a lo largo del curso si no que se trata del grupo que dejó de realizar entregas a partir del primer parcial (ejercicio \emph{medidas\_de\_especies}). Esto podría servir entonces como un indicador para saber quiénes continuarán pasada esta primer instancia de evaluación y quiénes no, basado únicamente en las producciones de código de alumnos.
@@ -640,7 +636,7 @@ En cuanto a los estudiantes que continuaron con las entregas pasada este examen 
     \label{cluster2}
 \end{figure}
 
-Siendo difícil distinguir por este medio, evidenciado en la la falta de agrupaciones observables en la figura anterior, surgió la necesidad de adoptar nuevas medidas para mejorar estos resultados. 
+Siendo difícil distinguir por este medio, evidenciado en la falta de agrupaciones observables en la figura anterior, surgió la necesidad de adoptar nuevas medidas para mejorar estos resultados. 
 
 \section{Nuevos enfoques para mejorar los resultados}
 
