@@ -719,7 +719,7 @@ Se analizó a continuación el efecto de la normalización de los \emph{embeddin
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.5\textwidth]{imagenes/cluster-normalized.png}
-    \caption{Cantidad de \emph{clusters} compartidos por estudiante con \emph{embeddings} con normalizados.}
+    \caption{Cantidad de \emph{clusters} compartidos por estudiante con \emph{embeddings} normalizados.}
     \label{normalizados}
 \end{figure}
 
@@ -817,6 +817,26 @@ Para comprender mejor la naturaleza de los agrupamientos observados, se realizó
 Al contrastar esta información con los resultados de agrupamiento (Figuras \ref{fig: zeros} y \ref{fig: fill func}), se reveló un patrón significativo: la aparente mejora en la clasificación está más relacionada con la tasa de participación que con las características intrínsecas de las soluciones. Por ejemplo, para el ejercicio \emph{experimento\_figus}, aunque el \emph{cluster\_0} contiene un 74\% de estudiantes que finalizaron el curso, este porcentaje aumenta al 80\% cuando se considera únicamente a quienes entregaron dicho ejercicio.
 
 Es notable que en las etapas iniciales del curso, las proporciones entre grupos se mantienen cercanas al 50\%, sugiriendo una clasificación poco efectiva. Este análisis nos lleva a concluir que el algoritmo de agrupamiento está capturando principalmente patrones de participación (entregas realizadas vs. no realizadas) en lugar de características distintivas entre estudiantes que completarán o no el curso. Esta observación sugiere que la mera presencia o ausencia de entregas podría ser un predictor más simple y efectivo que el análisis del contenido de las soluciones para este propósito específico.
+
+Adicionalmente, se calculó el coeficiente de correlación de Spearman para evaluar la correlación entre ambos modelos de asignación y la cantidad de entregas por alumno, como se ilustra en la Figura \ref{spearman}. Los resultados muestran un incremento significativo del coeficiente después de la entrega número 15, coincidente con el primer parcial, fenómeno atribuible a que los vectores de cada estudiante reflejan de manera más precisa las entregas realizadas en dichas instancias.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\linewidth]{imagenes/spearman_evolution.png}
+        \caption{Coeficiente de Spearman para grupo asignado con un único vector por alumno con vector correspondiente a la función vacía para las entregas no realizadas y alumnos que entregaron en cada instancia.}
+        \label{spearman_data}
+    \end{subfigure}
+   \hspace{0.05\textwidth}
+    \hfill
+    \begin{subfigure}[t]{0.45\textwidth}
+        \includegraphics[width=\linewidth]{imagenes/spearman_evolution_zeros.png}
+        \caption{Coeficiente de Spearman para grupo asignado con un único vector por alumno con vector de ceros para las entregas no realizadas y alumnos que entregaron en cada instancia.}
+        \label{spearman_zeros}
+    \end{subfigure}
+    \caption{Cálculo del coeficiente de correlación de Spearman entre alumnos que entregaron en cada instancia y su respectivo agrupamiento.}
+    \label{spearman}
+\end{figure} 
 
 Aún no se logró entonces caracterizar de manera efectiva a los estudiantes que, después del primer parcial, continúan realizando entregas, en contraste con aquellos que completan todo el curso. Esta diferenciación es importante para comprender mejor sus patrones de compromiso y desempeño a lo largo de la cursada. Aunque esta identificación temprana no se alcanzó en la primera mitad del curso, podríamos explorar su utilidad como predictor en etapas posteriores. De esta forma, podríamos anticipar, antes del segundo parcial, quiénes se mantendrán activos y probablemente se presentarán, permitiendo implementar estrategias de apoyo y retención más específicas para los estudiantes en riesgo de no finalizar.
 
