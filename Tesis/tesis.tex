@@ -343,7 +343,7 @@ El ``codo'' en la gráfica representa el punto de equilibrio donde el beneficio 
 
 La principal ventaja de este método radica en su capacidad para proporcionar una solución objetiva al problema de la selección del número de \emph{clusters}, eliminando la necesidad de basarse en suposiciones \emph{a priori} sobre la estructura de los datos \cite{metodo-codo}.
 
-
+\newpage
 \subsubsection{Fuzzy-c-means} \textbf{ }
 
 El algoritmo \emph{Fuzzy-c-means} es una técnica de agrupamiento que optimiza una función objetivo. Esta función minimiza la distancia entre los puntos de datos y los centros de los \emph{clusters}, ponderada por los valores de pertenencia difusa. El algoritmo itera entre actualizar los valores de pertenencia y los centros de los \emph{clusters} hasta alcanzar la convergencia. 
@@ -352,7 +352,7 @@ Entre las ventajas del \emph{Fuzzy-c-means} se encuentra su capacidad para permi
 
 Sin embargo, \emph{Fuzzy-c-means} , al igual que \emph{K-means},  también requiere que se especifique el número de grupos \emph{a priori}. En consecuencia, también es sensible a la inicialización, lo que puede afectar los resultados finales. Además, tiene un mayor costo computacional en comparación con \emph{K-means}.
 
-Chan et al. en ``Clustering of clusters'' introducen una variante llamada \emph{Recursive Fuzzy-2-Mean} (RF2M), que extiende el \emph{Fuzzy-c-means} para agrupar \emph{clusters} existentes. Esta variante introduce una tercera clase para los puntos que no encajan bien en ninguno de los dos \emph{clusters} principales, añadiendo así más flexibilidad al método original \cite{fuzzy-k-means}.
+Chan et al. en ``\emph{Clustering of clusters}'' introducen una variante llamada \emph{Recursive Fuzzy-2-Mean} (RF2M), que extiende el \emph{Fuzzy-c-means} para agrupar \emph{clusters} existentes. Esta variante introduce una tercera clase para los puntos que no encajan bien en ninguno de los dos \emph{clusters} principales, añadiendo así más flexibilidad al método original \cite{fuzzy-k-means}.
 
 \newpage
 \subsubsection{Evaluación} \textbf{ }
@@ -467,6 +467,7 @@ Cabe destacar que, a excepción de otros ejercicios típicamente introductorios 
 
 Se decidió entonces hacer foco en aquellos ejercicios en los que podían llegar a haber grupos mejor definidos. En un análisis posterior se exploró si estos grupos separaban de alguna manera a aquellos estudiantes que habían finalizado el curso de los que no. Para ello, se añadió como información adicional a las Figuras anteriores, quiénes habían finalizado el curso (\emph{id\_anon}) y quiénes no, como muestra la Figura  \ref{fig:figuras_juntas_tres}.
 
+\newpage
 \begin{figure}[H]
     \centering
     \begin{subfigure}{0.45\textwidth}
@@ -492,6 +493,7 @@ En un intento adicional por obtener información a partir de los ejercicios obse
 
 \section{Evaluación del agrupamiento de manera global}
 Para esta sección, se analizaron varias métricas para evaluar el \emph{clustering} realizado. La evaluación rigurosa de los resultados del agrupamiento es fundamental por múltiples razones: permite validar la calidad de las agrupaciones obtenidas, asegura que los patrones descubiertos son significativos y no aleatorios, y facilita la comparación objetiva entre diferentes configuraciones del algoritmo. Además, dado que el \emph{clustering} es una técnica de aprendizaje no supervisado, estas métricas proporcionan una forma cuantitativa de verificar si los grupos identificados representan verdaderamente estructuras naturales en los datos.
+
 \newpage
 \subsection{Métricas: ARI y NMI}
 Como se mencionó anteriormente, para cada ejercicio se realizó una \emph{clusterización} usando el método del codo. En el análisis de las agrupaciones generadas, se evaluó el grado de correspondencia entre las particiones obtenidas para cada ejercicio con las de los demás ejercicios. Para esto, se utilizaron dos métricas principales: el \emph{Indice de Información Mutua Normalizado} (NMI) \cite{nmi} y el \emph{Indice Rand Ajustado} (ARI) \cite{ari}. Los resultados de estas comparaciones pueden observarse en la Figura \ref{ari_nmi}, donde los valores de NMI y ARI para cada ejercicio se representan en relación con los demás.
@@ -520,6 +522,7 @@ Por otro lado, los bajos valores de ARI implican que la similitud entre las asig
 
 \subsection{Métricas: Índice de Jaccard}
 Para esta evaluación se analizaron las particiones de manera individual. Esto es, obviando a qué ejercicio pertenecían, se calculó el Índice de Similitud de Jaccard \cite{jaccard} para cada uno de los más de cien \emph{clusters} generados a lo largo de los 31 entregables.
+\newpage
 
 \begin{figure}[H]
     \centering
