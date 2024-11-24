@@ -33,7 +33,8 @@ Sumit Gulwani, Ivan Radi{\v{c}}ek, and Florian Zuleger.
 \bibitem{simgrade}
 Sonja Johnson-Yu, Nicholas Bowman, Mehran Sahami, and Chris Piech.
 \newblock Simgrade: Using code similarity measures for more accurate human
-  grading, 2024.
+  grading.
+\newblock \url{https://arxiv.org/abs/2403.14637}, 2024.
 \newblock [Online]. Available: 2024-10-19.
 
 \bibitem{brigante2020evaluation}
@@ -45,13 +46,14 @@ Siegfried~Nijssen Simone~Brigante, Silvia~Chiusano.
 \bibitem{wu2018zeroshotlearningcode}
 Mike Wu, Milan Mosse, Noah Goodman, and Chris Piech.
 \newblock Zero shot learning for code education: Rubric sampling with deep
-  learning inference, 2018.
+  learning inference.
+\newblock \url{https://arxiv.org/abs/1809.01357}, 2018.
 
 \bibitem{codeBert}
 Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
   Shou, Bing Qin, Ting Liu, Daxin Jiang, and Ming Zhou.
-\newblock Codebert: A pre-trained model for programming and natural languages,
-  2020.
+\newblock Codebert: A pre-trained model for programming and natural languages.
+\newblock \url{https://arxiv.org/abs/2002.08155}, 2020.
 
 \bibitem{codeBert-repo}
 Zhangyin Feng, Daya Guo, Duyu Tang, Nan Duan, Xiaocheng Feng, Ming Gong, Linjun
@@ -96,7 +98,10 @@ Python~Software Foundation.
 
 \bibitem{roberta_model}
 Hugging Face.
-\newblock Roberta model documentation, 2024.
+\newblock Roberta model documentation.
+\newblock
+  \url{https://huggingface.co/transformers/v2.9.1/model_doc/roberta.html},
+  2024.
 \newblock [Online]. Available: 2024-10-19.
 
 \bibitem{sklearn_normalize}
