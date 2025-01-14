@@ -58,7 +58,7 @@
 \def\autor{Carla de Erausquin}
 \def\tituloTesis{Caracterización de trayectorias educativas a partir de producciones de código}
 \def\runtitulo{Caracterización de trayectorias educativas a partir de producciones de código}
-\def\runtitle{Characterization of educational trajectories based on Code Productions}
+\def\runtitulo{Characterization of educational trajectories based on Code Productions}
 \def\director{Matías López y Rosenfeld}
 \def\codirector{Pablo Turjanski}
 \def\lugar{Buenos Aires, 2024}
@@ -110,7 +110,7 @@ En un análisis exploratorio realizado por alumnos de la facultad basado en Cens
 
 En los últimos años se observaron muchos esfuerzos en desarrollar herramientas para la enseñanza de la programación que pudieran capturar las características individuales para potenciar el aprendizaje. Algunas de estas líneas han buscado usar la noción de similitud como cantidad de cambios a realizar en un código para proponer corregir errores en ejercicios de manera automática~\cite{gulwani2018automated}.
 
-Gracias a los avances tecnológicos previamente mencionados, es posible trabajar con \emph{embeddings} de manera \emph{más sencilla} y poder proyectar texto en un espacio multidimensional. Una aplicación fue capturar semejanzas entre entregas de estudiantes y, organizándolas en orden por similitud, facilitar la tarea de corrección~\cite{simgrade}. Además, este tipo de análisis sirve para identificar el conocimiento adquirido en temas específicos de un curso~\cite{brigante2020evaluation}, así como la evolución a lo largo del mismo~\cite{wu2018zeroshotlearningcode}. Esto abre la oportunidad para poder planificar intervenciones docentes en momentos tempranos que potencien el aprendizaje, que en cursos masivos antes resultaba imposible. 
+Gracias a los avances tecnológicos previamente mencionados, es posible trabajar con \emph{embeddings}, representaciones numéricas de datos (texto, imágenes u otros) en forma de vector dentro de un espacio matemático multidimensional, de manera \emph{más sencilla} y poder proyectar texto en un espacio multidimensional. Una aplicación fue capturar semejanzas entre entregas de estudiantes y, organizándolas en orden por similitud, facilitar la tarea de corrección~\cite{simgrade}. Además, este tipo de análisis sirve para identificar el conocimiento adquirido en temas específicos de un curso~\cite{brigante2020evaluation}, así como la evolución a lo largo del mismo~\cite{wu2018zeroshotlearningcode}. Esto abre la oportunidad para poder planificar intervenciones docentes en momentos tempranos que potencien el aprendizaje, que en cursos masivos antes resultaba imposible. 
 
 En su investigación usando \emph{code2vec},  Brigante  evaluó si el código fuente en sí mismo, sin ejecutar el código o evaluar su salida, era suficiente para estimar la calidad de las respuestas de los estudiantes. Los resultados sugieren que, aunque no siempre se alcanzaron los resultados esperados, el análisis del código fuente ofrece algunos indicios útiles para evaluar la calidad del desarrollo del estudiante~\cite{brigante2020evaluation}.
 
@@ -119,7 +119,7 @@ En su investigación usando \emph{code2vec},  Brigante  evaluó si el código fu
 
 Se trata de un modelo preentrenado diseñado para entender y generar tanto lenguaje natural (NL) como lenguajes de programación (PL). Se basa en una arquitectura \emph{Transformer}, similar a \emph{BERT} y \emph{RoBERTa}, y fue entrenado usando datos bimodales (pares NL-PL) y unimodales (código o texto sin parejas), en seis lenguajes de programación (Python, Java, JavaScript, PHP, Ruby y Go) usando datos de repositorios públicos en GitHub. Esto último es particularmente relevante siendo que los cursos mencionados en la (FCEN-UBA), son dictados en el lenguaje Python.
 
-\emph{CodeBERT} genera  \emph{embeddings} o representaciones vectoriales de fragmentos de código mediante su arquitectura basada en \emph{Transformers}. Al alimentar un fragmento de código como entrada, se convierte el código en una secuencia de \emph{tokens} que luego se procesa a través de capas de redes neuronales para producir una representación contextualizada para cada \emph{token}. Estas representaciones logran capurar tanto la sintaxis como la semántica del programa.
+\emph{CodeBERT} genera  \emph{embeddings} o representaciones vectoriales de fragmentos de código mediante su arquitectura basada en \emph{Transformers}. Al alimentar un fragmento de código como entrada, se convierte el código en una secuencia de \emph{tokens} que luego se procesa a través de capas de redes neuronales para producir una representación contextualizada para cada \emph{token}. Estas representaciones logran capturar tanto la sintaxis como la semántica del programa.
 
 El \emph{embedding} final para un fragmento completo puede obtenerse utilizando el vector asociado al \emph{token} especial [CLS], que representa el significado agregado de la secuencia. Estos \emph{embeddings} pueden emplearse para tareas como búsqueda de código, clasificación, o generación de documentación, ya que contienen información relevante tanto del contenido del código como de su contexto.
 
@@ -142,7 +142,7 @@ Los datos empleados para este análisis son el resultado de entregas de alumnos 
 
 Esta materia se dictó con el objeto de \emph{enseñar los fundamentos del lenguaje Python orientado al manejo de datos, a la escritura de \emph{scripts} y a una organización adecuada de los programas; enseñar  algunos  rudimentos  de  la  teoría  de  algoritmos,  incluyendo  conceptos  básicos  de  la teoría de la complejidad y algunas estructuras de datos no triviales; e introducir la programación orientada a objetos}~\cite{unsam2020}.
 
-Con un total de 12 unidades y una duración de 3 meses, se realizó una evaluación permanente con entregas semanales de entre cuatro y seis ejercicios obligatorios por semana; llegando en total a  56  ejercicios  seleccionados  a  lo  largo  de  todo  el  curso.  Además  de  evaluar  estas  entregas semanales, se tomaron dos exámenes parciales de forma virtual y sincrónica con modalidad de opción múltiple lo que permitió una corrección automatizada. Si bien contamos con los datos sobre los resultados de la evaluación de este curso, no fueron considerados ya que se realizó foco en predecir quienes sencillamente lo habían finalizado. Para aprobar la materia resultó necesario haber realizado adecuadamente el 70\% de los  ejercicios  obligatorios  y  haber  aprobado  ambos  exámenes  parciales~\cite{unsam2020}.
+Con un total de 12 unidades y una duración de 3 meses, se realizó una evaluación permanente con entregas semanales de entre cuatro y seis ejercicios obligatorios por semana; llegando en total a  56  ejercicios  seleccionados  a  lo  largo  de  todo  el  curso.  Además  de  evaluar  estas  entregas semanales, se tomaron dos exámenes parciales de forma virtual y sincrónica con modalidad de opción múltiple lo que permitió una corrección automatizada. Si bien contamos con los datos sobre los resultados de la evaluación de este curso, no fueron considerados ya que se realizó foco en predecir quienes sencillamente lo habían finalizado. Esto es, rendido las dos evaluaciones necesarias para aprobar el curso independientemente de su resultado. Para aprobar la materia resultó necesario haber realizado adecuadamente el 70\% de los  ejercicios  obligatorios  y  haber  aprobado  ambos  exámenes  parciales~\cite{unsam2020}.
 
 El enfoque pedagógico de este curso, tanto en sus contenidos como en su metodología de enseñanza, tiene estrecha similitud con las materias introductorias que se dictan en nuestra facultad, particularmente con la cátedra de Introducción a la Programación. Esto nos permite inferir que los resultados de este análisis podrían ser extrapolables al contexto más amplio de la UBA.
 
@@ -153,7 +153,7 @@ Para desarrollar nuestra propia fuente de datos a partir de otras fuente, se uti
 
 \subsubsection{Extracción}\textbf{ }
 
-Los ejercicios fueron entregados a través de \emph{google-forms}. Las ejercitaciones de interés se descargaron de un \emph{google-drive} de uno de los docentes de la materia. De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las primeras 5, como se observa en la figura \ref{contenidos}. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del curso. 
+Los ejercicios fueron entregados a través de \emph{google-forms}. Las ejercitaciones de interés se descargaron de un \emph{google-drive} de uno de los docentes de la materia. De las 12 unidades que constituyeron al curso, para este análisis se tuvieron en cuenta únicamente las unidades 2, 3, 4 y 5 siendo la primera demasido introductoria como se observa en la figura \ref{contenidos}. Al finalizar la unidad 4 fue la presentación del primer examen. Siendo deseable la caracterización temprana de aquellos estudiantes que abandonarán el programa y con intenciones de que esto pueda replicarse en cursos futuros, se consideró estudiar únicamente la primera mitad del curso. 
 
 En la figura  \ref{contenidos} se pueden observar  los contenidos de la materia a analizar.
 
@@ -252,7 +252,7 @@ Para almacenar los tres conjuntos de datos previamente mencionados, se optó por
     \item \textbf{Integración con herramientas de análisis y desarrollo}: MongoDB se integra fácilmente con una amplia variedad de herramientas de análisis de datos, lenguajes de programación y bibliotecas, lo que facilita el desarrollo de aplicaciones y análisis de datos en entornos como Python. En particular, a la hora de implementar un conector para la base de datos creada localmente, se usó la biblioteca \emph{pymongo} \cite{pymongo}.
 \end{itemize}
 
-Luego, La base final obtenida finalmente, luego de aplicar el proceso de  ETL, se organizó con la estructura descrita en la Figura \ref{diagrama-base}.
+La base final obtenida finalmente, luego de aplicar el proceso de  ETL, se organizó con la estructura descrita en la Figura \ref{diagrama-base}.
 
 \begin{figure}[H]
     \centering
@@ -314,7 +314,7 @@ A partir de lo anterior, siendo que utilizar $for$ \emph{vs} $while$ puede cambi
 
 \subsection{Agrupamiento}
 
-La próxima sección abordará las técnicas de \emph{clustering} implementadas para agrupar estudiantes, basándose en los \emph{embeddings} y la reducción de dimensionalidad mediante la técnica de PCA.
+La próxima sección abordará las técnicas de \emph{clustering} implementadas para agrupar estudiantes, basándose en los \emph{embeddings} y la reducción de dimensionalidad mediante la técnica de PCA con tres componentes.
 
 \subsubsection{Kmeans}\textbf{ } 
 
@@ -640,7 +640,7 @@ En cuanto a los estudiantes que continuaron con las entregas pasada este examen 
     \label{cluster2}
 \end{figure}
 
-Habiendo obsrvado el pequeño grupo que parecería haber en la esquina inferior derecha de la Figura \ref {cluster2} se realizó un procedimiento similar al anterior; comenzando desde un número de \emph{clusters} considerado elevado (17 para este caso) se fue evaluando el \emph{clique} máximo con esa cantidad de grupos en común y su proporción de estudiantes que no habían finalizado el curso. Se esperaba encontrar una manera de caracterizar a aquellos alumnos que continuaron con el curso más allá del primer parcial, pero no lo finalizaron. Sin embargo, no se observó una clara tendencia: el tamaño de los \emph{cliques} no era representativo (menor al 1\% del curso) e incluso entonces, no resultaron en grupos homogéneos. Esto es, los \emph{cliques} para estas instancias estaban conformados tanto por estudiantes que finalizarían y abandonarían el curso.
+Habiendo observado el pequeño grupo que parecería haber en la esquina inferior derecha de la Figura \ref {cluster2} se realizó un procedimiento similar al anterior; comenzando desde un número de \emph{clusters} considerado elevado (17 para este caso) se fue evaluando el \emph{clique} máximo con esa cantidad de grupos en común y su proporción de estudiantes que no habían finalizado el curso. Se esperaba encontrar una manera de caracterizar a aquellos alumnos que continuaron con el curso más allá del primer parcial, pero no lo finalizaron. Sin embargo, no se observó una clara tendencia: el tamaño de los \emph{cliques} no era representativo (menor al 1\% del curso) e incluso entonces, no resultaron en grupos homogéneos. Esto es, los \emph{cliques} para estas instancias estaban conformados tanto por estudiantes que finalizarían y abandonarían el curso.
 
 Siendo difícil entonces distinguir por este medio, evidenciado en la falta de agrupaciones observables en la figura anterior, surgió la necesidad de adoptar nuevas medidas para mejorar estos resultados. 
 
